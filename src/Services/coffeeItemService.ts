@@ -208,6 +208,5 @@ class CoffeeItemService {
                console.error(error);
           }
      };
-     getCoffeeByCategory = async () => {};
 }
 export default CoffeeItemService;

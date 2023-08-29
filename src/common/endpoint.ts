@@ -17,5 +17,7 @@ enum Endpoint {
      DELETE_CATEGORY = '/deletecategory/:category_id',
      GET_ALL_CATEGORY = '/getallcategory',
      GET_COFFEE_LIKED = '/getcoffeeliked',
+     ORDER_COFFEE = '/order',
+     DELETE_ORDER = '/deleteorder/:id',
 }
 export default Endpoint;
