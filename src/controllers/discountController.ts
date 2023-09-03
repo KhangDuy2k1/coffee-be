@@ -1,5 +1,5 @@
 import { Discount } from '../Services/discountService';
-import express, { Request, Response } from 'express';
+import express, { Request, Response, response } from 'express';
 import { StatusCode } from '../common/statusCode';
 export const discountRouter = express.Router();
 const discount = new Discount();
@@ -52,6 +52,35 @@ export class DiscountCtr {
                     res.json({
                          success: false,
                          mes: 'lay discount that bai',
+                    })
+               );
+          }
+     };
+     deleteDiscount = async (req: Request, res: Response) => {
+          const id_discount = req.params.id;
+
+          const response = await discount.deleteDiscount(id_discount);
+          if (response.success) {
+               return (
+                    res.status(StatusCode.OK),
+                    res.json({
+                         mes: 'xoa thanh cong',
+                         discountDeleted: response.discountDeleted,
+                    })
+               );
+          } else if (!response.error) {
+               return (
+                    res.status(StatusCode.BAD_REQUEST),
+                    res.json({
+                         mes: 'khong tim thay discount',
+                    })
+               );
+          } else {
+               return (
+                    res.status(StatusCode.SERVER_ERROR),
+                    res.json({
+                         mes: 'loi server',
+                         error: response.error,
                     })
                );
           }

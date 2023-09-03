@@ -52,4 +52,27 @@ export class Discount {
                };
           }
      };
+     deleteDiscount = async (id_Discount: string) => {
+          try {
+               const deleteDiscount = await discountModel.findByIdAndDelete(
+                    id_Discount
+               );
+               if (!deleteDiscount) {
+                    return {
+                         success: false,
+                         mes: 'id khong ton tai',
+                    };
+               } else {
+                    return {
+                         success: true,
+                         discountDeleted: deleteDiscount,
+                    };
+               }
+          } catch (error) {
+               return {
+                    success: false,
+                    error: error,
+               };
+          }
+     };
 }
