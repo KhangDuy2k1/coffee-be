@@ -35,4 +35,25 @@ export class DiscountCtr {
                );
           }
      };
+     allDiscount = async (req: Request, res: Response) => {
+          const response = await discount.getAllDiscount();
+          if (response.success) {
+               return (
+                    res.status(StatusCode.OK),
+                    res.json({
+                         success: true,
+                         mes: 'lay discount thanh cong',
+                         discounts: response.allDiscount,
+                    })
+               );
+          } else {
+               return (
+                    res.status(StatusCode.SERVER_ERROR),
+                    res.json({
+                         success: false,
+                         mes: 'lay discount that bai',
+                    })
+               );
+          }
+     };
 }

@@ -36,7 +36,7 @@ export class Discount {
                };
           }
      };
-     getDiscount = async () => {
+     getAllDiscount = async () => {
           try {
                const allDiscount = await discountModel
                     .find()

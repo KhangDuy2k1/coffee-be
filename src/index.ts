@@ -1,15 +1,19 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
+import Connect from './config/database';
 dotenv.config();
 import AuthRouter from './routes/authRouter';
-import Connect from './config/database';
+import { discountRouter } from './controllers/discountController';
+import { CategoryRouter } from './routes/categoryRouter';
+import { orderRouter } from './routes/orderRouter';
 import { ErrorUrl } from './middlewares/errorMiddleware';
+import { RunSocket } from '../socket/socket';
 import cors, { CorsOptions } from 'cors';
 import http from 'http';
-import { RunSocket } from '../socket/socket';
+
 import CoffeeItemRouter from './routes/coffeeItemRouter';
 import 'express-async-errors';
-import { CategoryRouter } from './routes/categoryRouter';
+
 class App {
      private app: express.Application;
      private port: number | string;
@@ -31,6 +35,8 @@ class App {
           this.app.use('/api/user', AuthRouter);
           this.app.use('/api/coffee', CoffeeItemRouter);
           this.app.use('/api/category', CategoryRouter);
+          this.app.use('/api/discount', discountRouter);
+          this.app.use('/api/order', orderRouter);
      }
      ErrorUrl = () => {
           this.app.use(new ErrorUrl().errUrl);
