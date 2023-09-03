@@ -6,7 +6,6 @@ interface ICoffeeItem extends mongoose.Document {
      stars: number;
      image: string;
      desc: string;
-     orders: string[];
      category?: string;
 }
 export default ICoffeeItem;

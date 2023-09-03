@@ -29,12 +29,6 @@ const CoffeeItemSchema: Schema<ICoffeeItem> = new Schema<ICoffeeItem>(
                type: mongoose.Types.ObjectId,
                ref: 'Category',
           },
-          orders: [
-               {
-                    type: mongoose.Types.ObjectId,
-                    ref: 'Order',
-               },
-          ],
      },
      {
           timestamps: true,

@@ -143,9 +143,9 @@ class CoffeeItemService {
                     };
                } else {
                     User_liked?.likedCoffeeItem.push(params.coffee_id);
-                    await User_liked?.save();
+                    const user_liked = await User_liked?.save();
                     return {
-                         userLiked: User_liked,
+                         userLiked: user_liked?.populate('likedCoffeeItem'),
                          success: true,
                          mes: 'đã liked Coffee',
                     };
@@ -192,7 +192,7 @@ class CoffeeItemService {
                if (arrCoffeeLiked) {
                     const listCoffeeLike = await CoffeeItemModel.find({
                          _id: { $in: arrCoffeeLiked },
-                    });
+                    }).populate('category');
                     if (listCoffeeLike.length == 0) {
                          return {
                               success: false,

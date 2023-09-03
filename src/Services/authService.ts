@@ -133,7 +133,9 @@ class AuthService {
      };
      getalluser = async (): Promise<ResAuth> => {
           try {
-               const allUser: IUser[] = await UserModel.find({});
+               const allUser: IUser[] = await UserModel.find({}).populate(
+                    'likedCoffeeItem'
+               );
                return {
                     success: true,
                     allUser: allUser,

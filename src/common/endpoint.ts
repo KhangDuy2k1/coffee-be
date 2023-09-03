@@ -19,5 +19,6 @@ enum Endpoint {
      GET_COFFEE_LIKED = '/getcoffeeliked',
      ORDER_COFFEE = '/order',
      DELETE_ORDER = '/deleteorder/:id',
+     CREATE_DISCOUNT = '/discount',
 }
 export default Endpoint;
