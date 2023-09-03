@@ -5,3 +5,4 @@ import Endpoint from '../common/endpoint';
 const discountRouter = express.Router();
 discountRouter.post(Endpoint.CREATE_DISCOUNT, discountCtr.discount);
 discountRouter.get(Endpoint.GET_ALLDISCOUNT, discountCtr.allDiscount);
+discountRouter.delete(Endpoint.DELETE_DISCOUNT, discountCtr.deleteDiscount);
