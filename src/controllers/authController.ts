@@ -3,12 +3,12 @@ import AuthService from '../Services/authService';
 import { StatusCode } from '../common/statusCode';
 import CheckId from '../helpers/checkIdHelper';
 import { ResAuth } from '../helpers/interfacesHelper';
-
+const authService = new AuthService();
 class AuthCtr {
      Register = async (req: Request, res: Response): Promise<any> => {
           const body: { email: string; password: string; phonenumber: string } =
                req.body;
-          const userif: ResAuth = await new AuthService().register(body);
+          const userif: ResAuth = await authService.register(body);
           if (userif.success) {
                const resCtrSuccess: ResAuth = {
                     success: true,
@@ -35,7 +35,7 @@ class AuthCtr {
      };
      Login = async (req: Request, res: Response): Promise<any> => {
           const body: { email: string; password: string } = req.body;
-          const responseLogin: ResAuth = await new AuthService().login(body);
+          const responseLogin: ResAuth = await authService.login(body);
           if (responseLogin?.success) {
                const resLoginSuccess: ResAuth = {
                     success: true,
@@ -67,9 +67,7 @@ class AuthCtr {
      };
      Refresh = async (req: Request, res: Response): Promise<any> => {
           const body: { refreshToken: string } = req.body;
-          const responseRefreshToken: ResAuth = await new AuthService().refresh(
-               body
-          );
+          const responseRefreshToken: ResAuth = await authService.refresh(body);
           if (responseRefreshToken.success) {
                const resRefreshTokenSucess: ResAuth = {
                     success: true,
@@ -107,7 +105,7 @@ class AuthCtr {
           }
      };
      getAllUser = async (req: Request, res: Response): Promise<any> => {
-          const responseAllUser: ResAuth = await new AuthService().getalluser();
+          const responseAllUser: ResAuth = await authService.getalluser();
           if (responseAllUser.success) {
                const resAllUserSuccess: ResAuth = {
                     success: true,
@@ -133,9 +131,7 @@ class AuthCtr {
      ): Promise<any> => {
           const param: { id: string } = req.params;
           CheckId(param.id);
-          const resDeleteUser: ResAuth = await new AuthService().deleteUser(
-               param.id
-          );
+          const resDeleteUser: ResAuth = await authService.deleteUser(param.id);
           if (resDeleteUser.success) {
                const resDeleteSuccess: ResAuth = {
                     success: true,
@@ -152,6 +148,34 @@ class AuthCtr {
                return (
                     res.status(StatusCode.SERVER_ERROR),
                     res.json(resDeleteError)
+               );
+          }
+     };
+     getUserById = async (req: Request, res: Response): Promise<any> => {
+          const id = req.params.id;
+          const response = await authService.getUserById(id);
+          if (response.success) {
+               return (
+                    res.status(StatusCode.OK),
+                    res.json({
+                         mes: 'lay user thanh cong ',
+                         user: response.user,
+                    })
+               );
+          } else if (!response.error) {
+               return (
+                    res.status(StatusCode.BAD_REQUEST),
+                    res.json({
+                         mes: 'khong tim thay user',
+                    })
+               );
+          } else {
+               return (
+                    res.status(StatusCode.SERVER_ERROR),
+                    res.json({
+                         mes: 'loi server',
+                         error: response.error,
+                    })
                );
           }
      };

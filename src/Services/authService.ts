@@ -165,5 +165,26 @@ class AuthService {
                };
           }
      };
+     getUserById = async (id: string) => {
+          try {
+               const user = await UserModel.findById(id);
+               if (!user) {
+                    return {
+                         success: false,
+                         mes: 'khong tim thay user',
+                    };
+               } else {
+                    return {
+                         success: true,
+                         user: user,
+                    };
+               }
+          } catch (error) {
+               return {
+                    success: false,
+                    error: error,
+               };
+          }
+     };
 }
 export default AuthService;

@@ -16,3 +16,8 @@ orderRouter.delete(
      authMiddleware.isAdmin,
      orderCtr.deleteOrder
 );
+orderRouter.get(
+     Endpoint.GET_ALL_ORDER,
+     authMiddleware.VerifyAccount,
+     orderCtr.orders
+);

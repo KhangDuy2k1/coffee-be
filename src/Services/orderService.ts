@@ -13,14 +13,14 @@ export class OrderService {
           order?: IOrder;
           error?: any;
      }> => {
+          console.log(user_id);
           try {
-               const orderCoffee = new OrderModel({
+               const orderCoffee = await OrderModel.create({
                     user_id: user_id,
                     coffeeItem_id: orderDetail.coffeeitem_id,
                     quantity: orderDetail.quantity,
                     total: orderDetail.total,
                });
-               await orderCoffee.save();
                return {
                     success: true,
                     order: orderCoffee,
@@ -52,6 +52,30 @@ export class OrderService {
                     return {
                          success: true,
                          ordeDeleted: orderDeleted,
+                    };
+               }
+          } catch (error) {
+               return {
+                    success: false,
+                    error: error,
+               };
+          }
+     };
+     orders = async (id_user: string) => {
+          console.log(id_user);
+          try {
+               const allOrder = await OrderModel.find({
+                    user_id: id_user,
+               }).populate('coffeeItem_id');
+               console.log(allOrder);
+               if (allOrder.length === 0) {
+                    return {
+                         success: false,
+                    };
+               } else {
+                    return {
+                         success: true,
+                         order: allOrder,
                     };
                }
           } catch (error) {

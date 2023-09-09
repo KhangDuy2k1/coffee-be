@@ -14,6 +14,9 @@ const orderSchema: Schema<IOrder> = new Schema<IOrder>(
                type: mongoose.Types.ObjectId,
                ref: 'CoffeeItem',
           },
+          total: {
+               type: Number,
+          },
           createAt: {
                type: Number,
                default: Date.now(),
