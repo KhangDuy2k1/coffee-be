@@ -6,6 +6,7 @@ enum Endpoint {
      GET_ALLUSER = '/getalluser',
      DELETE_USER = '/deleteuser/:id',
      GET_USER_BY_ID = '/userbyid/:id',
+     TOTAL_USER = '/totaluser',
      //Coffee
      FIND_COFFEE = '/search',
      ADD_COFFEE = '/addcoffee',
@@ -25,6 +26,7 @@ enum Endpoint {
      ORDER_COFFEE = '/order',
      DELETE_ORDER = '/deleteorder/:id',
      GET_ALL_ORDER = '/orders',
+     TOTAL_ORDER = '/totalorder',
      //discount
      CREATE_DISCOUNT = '/adddiscount',
      GET_ALLDISCOUNT = '/discount',

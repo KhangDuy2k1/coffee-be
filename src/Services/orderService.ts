@@ -85,4 +85,18 @@ export class OrderService {
                };
           }
      };
+     getTotalOrder = async () => {
+          try {
+               const total = await OrderModel.countDocuments({});
+               return {
+                    success: true,
+                    total: total,
+               };
+          } catch (error) {
+               return {
+                    success: false,
+                    error: error,
+               };
+          }
+     };
 }

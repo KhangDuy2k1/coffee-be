@@ -88,4 +88,24 @@ export class OrderController {
                );
           }
      };
+     totalOrder = async (req: Request, res: Response): Promise<any> => {
+          const respone = await orderService.getTotalOrder();
+          if (respone.success) {
+               return (
+                    res.status(StatusCode.OK),
+                    res.json({
+                         mes: 'lấy tổng số đơn hàng thành công',
+                         total: respone.total,
+                    })
+               );
+          } else {
+               return (
+                    res.status(StatusCode.SERVER_ERROR),
+                    res.json({
+                         mes: 'lỗi server',
+                         error: respone.error,
+                    })
+               );
+          }
+     };
 }

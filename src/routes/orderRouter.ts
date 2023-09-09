@@ -21,3 +21,9 @@ orderRouter.get(
      authMiddleware.VerifyAccount,
      orderCtr.orders
 );
+orderRouter.get(
+     Endpoint.TOTAL_ORDER,
+     authMiddleware.VerifyAccount,
+     authMiddleware.isAdmin,
+     orderCtr.totalOrder
+);

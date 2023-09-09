@@ -186,5 +186,19 @@ class AuthService {
                };
           }
      };
+     getTotalUser = async () => {
+          try {
+               const totalUser = await UserModel.countDocuments({});
+               return {
+                    success: true,
+                    totalUser: totalUser,
+               };
+          } catch (error) {
+               return {
+                    success: false,
+                    error: error,
+               };
+          }
+     };
 }
 export default AuthService;

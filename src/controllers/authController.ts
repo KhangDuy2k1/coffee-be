@@ -179,6 +179,25 @@ class AuthCtr {
                );
           }
      };
+     getTotalUser = async (req: Request, res: Response) => {
+          const response = await authService.getTotalUser();
+          if (response.success) {
+               return (
+                    res.status(StatusCode.OK),
+                    res.json({
+                         mes: 'lấy tổng người dùng thành công',
+                         totalUser: response.totalUser,
+                    })
+               );
+          } else {
+               return (
+                    res.status(StatusCode.SERVER_ERROR),
+                    res.json({
+                         mes: 'lỗi server',
+                    })
+               );
+          }
+     };
 }
 
 export default AuthCtr;

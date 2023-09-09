@@ -40,4 +40,10 @@ AuthRouter.get(
      middlewaresAuth.isAdmin,
      authCtr.getUserById
 );
+AuthRouter.get(
+     Endpoint.TOTAL_USER,
+     middlewaresAuth.VerifyAccount,
+     middlewaresAuth.isAdmin,
+     authCtr.getTotalUser
+);
 export default AuthRouter;
