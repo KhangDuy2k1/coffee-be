@@ -10,8 +10,3 @@ reviewsRouter.post(
      authMiddleware.VerifyAccount,
      starController.coffeeReviews
 );
-reviewsRouter.get(
-     Endpoint.STARS_MEDIUM,
-     authMiddleware.VerifyAccount,
-     starController.starsMediumById
-);
