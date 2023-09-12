@@ -37,5 +37,8 @@ enum Endpoint {
      CREATE_DISCOUNT = '/adddiscount',
      GET_ALLDISCOUNT = '/discount',
      DELETE_DISCOUNT = '/deletediscount/:id',
+     //Reviews
+     REVIEWS_COFFEE = '/reviews/:id',
+     STARS_MEDIUM = '/starmedium/:id_coffee',
 }
 export default Endpoint;

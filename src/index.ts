@@ -13,6 +13,7 @@ import http from 'http';
 
 import CoffeeItemRouter from './routes/coffeeItemRouter';
 import 'express-async-errors';
+import { reviewsRouter } from './routes/starRouter';
 
 class App {
      private app: express.Application;
@@ -37,6 +38,7 @@ class App {
           this.app.use('/api/category', CategoryRouter);
           this.app.use('/api/discount', discountRouter);
           this.app.use('/api/order', orderRouter);
+          this.app.use('/api/reviews', reviewsRouter);
      }
      ErrorUrl = () => {
           this.app.use(new ErrorUrl().errUrl);
