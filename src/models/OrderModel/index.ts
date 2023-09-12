@@ -14,6 +14,10 @@ const orderSchema: Schema<IOrder> = new Schema<IOrder>(
                type: mongoose.Types.ObjectId,
                ref: 'CoffeeItem',
           },
+          status: {
+               type: String,
+               default: 'đã đặt hàng',
+          },
           total: {
                type: Number,
           },

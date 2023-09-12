@@ -41,7 +41,7 @@ export class ValidatesMiddleware {
                          mes: 'email khong dung dinh dang',
                     })
                );
-          } else if (
+          } else if ( 
                !validator.isLength(body.password, { min: 6, max: undefined })
           ) {
                return (

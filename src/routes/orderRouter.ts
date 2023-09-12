@@ -10,6 +10,11 @@ orderRouter.post(
      authMiddleware.VerifyAccount,
      orderCtr.orderCoffee
 );
+orderRouter.post(
+     Endpoint.PAY_ORDER,
+     authMiddleware.VerifyAccount,
+     orderCtr.payOrder
+);
 orderRouter.delete(
      Endpoint.DELETE_ORDER,
      authMiddleware.VerifyAccount,
@@ -26,4 +31,16 @@ orderRouter.get(
      authMiddleware.VerifyAccount,
      authMiddleware.isAdmin,
      orderCtr.totalOrder
+);
+
+orderRouter.put(
+     Endpoint.CANCLE,
+     authMiddleware.VerifyAccount,
+     orderCtr.cancleOrder
+);
+orderRouter.get(
+     Endpoint.TOTAL_CANCLE,
+     authMiddleware.VerifyAccount,
+     authMiddleware.isAdmin,
+     orderCtr.totalCancled
 );

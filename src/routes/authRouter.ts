@@ -28,6 +28,12 @@ AuthRouter.get(
      middlewaresAuth.isAdmin,
      authCtr.getAllUser
 );
+AuthRouter.put(
+     Endpoint.UPDATE_USER,
+     middlewaresAuth.VerifyAccount,
+     middlewaresAuth.isAdmin,
+     authCtr.updateUser
+);
 AuthRouter.delete(
      Endpoint.DELETE_USER,
      middlewaresAuth.VerifyAccount,

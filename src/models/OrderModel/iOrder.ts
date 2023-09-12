@@ -4,6 +4,7 @@ interface IOrder extends Document {
      user_id?: string;
      quantity: number;
      total: number;
+     status: string;
      createAt: number;
      updateAt: number;
 }

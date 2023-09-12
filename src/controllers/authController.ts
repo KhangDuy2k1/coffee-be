@@ -125,6 +125,41 @@ class AuthCtr {
                );
           }
      };
+     updateUser = async (req: Request, res: Response): Promise<any> => {
+          const id = req.params.id;
+          const user_update: {
+               email: string;
+               phonenumber: string;
+               role: string;
+          } = req.body;
+          const response = await authService.updateUser(id, user_update);
+          if (response.success) {
+               return (
+                    res.status(StatusCode.OK),
+                    res.json({
+                         success: true,
+                         mes: 'cập nhật người dùng thành công',
+                         userUpdated: response.userUpdated,
+                    })
+               );
+          } else if (!response.error) {
+               return (
+                    res.status(StatusCode.BAD_REQUEST),
+                    res.json({
+                         success: false,
+                         mes: 'không tìm thấy người dùng cập nhật',
+                    })
+               );
+          } else {
+               return (
+                    res.status(StatusCode.SERVER_ERROR),
+                    res.json({
+                         success: false,
+                         mes: 'lỗi server',
+                    })
+               );
+          }
+     };
      deleteUser = async (
           req: Request<{ id: string }>,
           res: Response

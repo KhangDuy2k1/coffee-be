@@ -148,6 +148,44 @@ class AuthService {
                };
           }
      };
+     updateUser = async (
+          id: string,
+          user_update: {
+               email: string;
+               phonenumber: string;
+               role: string;
+          }
+     ) => {
+          try {
+               const userUpdated = await UserModel.findByIdAndUpdate(
+                    id,
+                    {
+                         email: user_update.email,
+                         phonenumber: user_update.phonenumber,
+                         role: user_update.role,
+                    },
+                    {
+                         new: true,
+                    }
+               );
+               if (!userUpdated) {
+                    return {
+                         success: false,
+                         mes: 'không tìm thấy user',
+                    };
+               } else {
+                    return {
+                         success: true,
+                         userUpdated: userUpdated,
+                    };
+               }
+          } catch (error) {
+               return {
+                    success: false,
+                    error: error,
+               };
+          }
+     };
      deleteUser = async (id: string): Promise<ResAuth> => {
           try {
                const userDeleted: IUser | null =

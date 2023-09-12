@@ -66,7 +66,9 @@ export class OrderService {
           try {
                const allOrder = await OrderModel.find({
                     user_id: id_user,
-               }).populate('coffeeItem_id');
+               })
+                    .populate('coffeeItem_id')
+                    .populate('user_id');
                console.log(allOrder);
                if (allOrder.length === 0) {
                     return {
@@ -91,6 +93,78 @@ export class OrderService {
                return {
                     success: true,
                     total: total,
+               };
+          } catch (error) {
+               return {
+                    success: false,
+                    error: error,
+               };
+          }
+     };
+     payOrder = async (
+          id_user: string,
+          orderDetail: {
+               coffeeitem_id: string;
+               quantity: number;
+               total: number;
+          }
+     ) => {
+          try {
+               const response = await OrderModel.create({
+                    user_id: id_user,
+                    coffeeItem_id: orderDetail.coffeeitem_id,
+                    quantity: orderDetail.quantity,
+                    status: 'đã thanh toán',
+                    total: orderDetail.total,
+               });
+               return {
+                    success: true,
+                    orderPaid: response,
+               };
+          } catch (error) {
+               return {
+                    success: false,
+                    error: error,
+               };
+          }
+     };
+     cancleOrder = async (id_order: string) => {
+          try {
+               const response = await OrderModel.findByIdAndUpdate(
+                    id_order,
+                    {
+                         status: 'đã hủy',
+                    },
+                    {
+                         new: true,
+                    }
+               );
+               if (!response) {
+                    return {
+                         success: false,
+                         mes: 'không tìm thấy id',
+                    };
+               } else {
+                    return {
+                         success: true,
+                         orderCancled: response,
+                    };
+               }
+          } catch (error) {
+               return {
+                    success: false,
+                    error: error,
+               };
+          }
+     };
+     totalCancled = async () => {
+          try {
+               const response = await OrderModel.countDocuments({
+                    status: 'đã hủy',
+               });
+               return {
+                    success: true,
+                    totalCancled: response,
                };
           } catch (error) {
                return {

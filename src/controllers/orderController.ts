@@ -108,4 +108,81 @@ export class OrderController {
                );
           }
      };
+     payOrder = async (req: Request, res: Response) => {
+          const id_user = (req as any).user._id;
+          const payOderDetail: {
+               coffeeitem_id: string;
+               quantity: number;
+               total: number;
+          } = req.body;
+          const response = await orderService.payOrder(id_user, payOderDetail);
+          if (response.success) {
+               return (
+                    res.status(StatusCode.OK),
+                    res.json({
+                         success: true,
+                         mes: 'thanh toán thành công',
+                         orderPaid: response.orderPaid,
+                    })
+               );
+          } else {
+               return (
+                    res.status(StatusCode.SERVER_ERROR),
+                    res.json({
+                         success: false,
+                         mes: 'lỗi server',
+                         error: response.error,
+                    })
+               );
+          }
+     };
+     cancleOrder = async (req: Request, res: Response): Promise<any> => {
+          const id_order: string = req.params.id;
+          const response = await orderService.cancleOrder(id_order);
+          if (response.success) {
+               return (
+                    res.status(StatusCode.OK),
+                    res.json({
+                         success: true,
+                         mes: 'hủy thành công',
+                         orderCancled: response.orderCancled,
+                    })
+               );
+          } else if (!response.error) {
+               return (
+                    res.status(StatusCode.BAD_REQUEST),
+                    res.json({
+                         success: false,
+                         mes: 'không tìm thấy id',
+                    })
+               );
+          } else {
+               return (
+                    res.status(StatusCode.SERVER_ERROR),
+                    res.json({
+                         success: false,
+                         mes: 'xảy ra lỗi',
+                    })
+               );
+          }
+     };
+     totalCancled = async (req: Request, res: Response) => {
+          const response = await orderService.totalCancled();
+          if (response.success) {
+               return (
+                    res.status(StatusCode.OK),
+                    res.json({
+                         success: true,
+                         mes: 'lấy tổng số đơn hàng đã hủy thành công',
+                         total: response.totalCancled,
+                    })
+               );
+          } else {
+               return {
+                    success: false,
+                    mes: 'có lỗi',
+                    error: response.error,
+               };
+          }
+     };
 }

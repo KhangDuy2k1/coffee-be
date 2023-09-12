@@ -22,7 +22,7 @@ class App {
      //      // origin: 'http://localhost:8888',
      // };
      SetupMiddleware = () => {
-          // this.app.use(cors(this.coreOption));
+          this.app.use(cors());
           this.app.use(express.json({ limit: '50mb' }));
           this.app.use(
                express.urlencoded({

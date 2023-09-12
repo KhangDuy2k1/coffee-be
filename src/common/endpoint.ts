@@ -4,6 +4,7 @@ enum Endpoint {
      LOGIN = '/login',
      REFRESH_TOKEN = '/refresh',
      GET_ALLUSER = '/getalluser',
+     UPDATE_USER = '/udpateuser/:id',
      DELETE_USER = '/deleteuser/:id',
      GET_USER_BY_ID = '/userbyid/:id',
      TOTAL_USER = '/totaluser',
@@ -24,9 +25,13 @@ enum Endpoint {
      GET_ALL_CATEGORY = '/getallcategory',
      //order
      ORDER_COFFEE = '/order',
+     PAY_ORDER = '/pay',
+     CANCLE = '/cancle/:id',
+     TOTAL_CANCLE = '/totalcancle',
      DELETE_ORDER = '/deleteorder/:id',
      GET_ALL_ORDER = '/orders',
      TOTAL_ORDER = '/totalorder',
+
      //discount
      CREATE_DISCOUNT = '/adddiscount',
      GET_ALLDISCOUNT = '/discount',
