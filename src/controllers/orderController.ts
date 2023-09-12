@@ -185,4 +185,35 @@ export class OrderController {
                };
           }
      };
+     receivedOrder = async (req: Request, res: Response): Promise<any> => {
+          const id_order: string = req.params.id;
+          const response = await orderService.receivedOrder(id_order);
+          if (response.success) {
+               return (
+                    res.status(StatusCode.OK),
+                    res.json({
+                         success: true,
+                         mes: 'nhận hàng thành công',
+                         orderReceived: response.orderReceived,
+                    })
+               );
+          } else if (!response.error) {
+               return (
+                    res.status(StatusCode.BAD_REQUEST),
+                    res.json({
+                         success: false,
+                         mes: 'không tìm thấy id',
+                    })
+               );
+          } else {
+               return (
+                    res.status(StatusCode.SERVER_ERROR),
+                    res.json({
+                         success: false,
+                         mes: 'có lỗi xảy ra',
+                         error: response.error,
+                    })
+               );
+          }
+     };
 }

@@ -44,3 +44,8 @@ orderRouter.get(
      authMiddleware.isAdmin,
      orderCtr.totalCancled
 );
+orderRouter.put(
+     Endpoint.RECEIVED_ORDER,
+     authMiddleware.VerifyAccount,
+     orderCtr.receivedOrder
+);

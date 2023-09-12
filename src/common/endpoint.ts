@@ -27,6 +27,7 @@ enum Endpoint {
      ORDER_COFFEE = '/order',
      PAY_ORDER = '/pay',
      CANCLE = '/cancle/:id',
+     RECEIVED_ORDER = '/received/:id',
      TOTAL_CANCLE = '/totalcancle',
      DELETE_ORDER = '/deleteorder/:id',
      GET_ALL_ORDER = '/orders',

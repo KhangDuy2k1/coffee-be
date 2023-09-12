@@ -173,4 +173,33 @@ export class OrderService {
                };
           }
      };
+     receivedOrder = async (id_order: string) => {
+          try {
+               const response = await OrderModel.findByIdAndUpdate(
+                    id_order,
+                    {
+                         status: 'giao hàng thành công',
+                    },
+                    {
+                         new: true,
+                    }
+               );
+               if (!response) {
+                    return {
+                         success: false,
+                         mes: ' không tìm thấy id',
+                    };
+               } else {
+                    return {
+                         success: true,
+                         orderReceived: response,
+                    };
+               }
+          } catch (error) {
+               return {
+                    success: false,
+                    error: error,
+               };
+          }
+     };
 }
