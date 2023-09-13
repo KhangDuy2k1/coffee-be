@@ -80,7 +80,8 @@ export class WalletService {
                          };
                     } else {
                          let tienHienCo = userWallet.amountMoney;
-                         let tienSaukhiHoan = tienHienCo + priceCoffee;
+                         let tienSaukhiHoan =
+                              tienHienCo + priceCoffee * order.quantity;
                          userWallet.amountMoney = tienSaukhiHoan;
                          const walletAfter = await userWallet.save();
                          return {
