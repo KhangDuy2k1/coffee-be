@@ -109,4 +109,35 @@ export class WalletController {
                );
           }
      };
+     getWalletUser = async (req: Request, res: Response) => {
+          const id_user: string = (req as any).user._id;
+          const response = await walletService.getWalletUser(id_user);
+          if (response.success) {
+               return (
+                    res.status(StatusCode.OK),
+                    res.json({
+                         success: true,
+                         mes: response.mes,
+                         wallet: response.wallet,
+                    })
+               );
+          } else if (response.mes === 'Không tìm thấy ví') {
+               return (
+                    res.status(StatusCode.BAD_REQUEST),
+                    res.json({
+                         success: false,
+                         mes: response.mes,
+                    })
+               );
+          } else {
+               return (
+                    res.status(StatusCode.SERVER_ERROR),
+                    res.json({
+                         success: false,
+                         mes: response.mes,
+                         error: response.error,
+                    })
+               );
+          }
+     };
 }

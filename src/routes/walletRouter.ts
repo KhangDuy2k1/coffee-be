@@ -21,3 +21,8 @@ walletRouter.put(
      authMiddleware.VerifyAccount,
      walletController.cancle
 );
+walletRouter.get(
+     Endpoint.GET_WALLET_USER,
+     authMiddleware.VerifyAccount,
+     walletController.getWalletUser
+);

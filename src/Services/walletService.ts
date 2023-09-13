@@ -109,4 +109,29 @@ export class WalletService {
                };
           }
      };
+     getWalletUser = async (id_user: string) => {
+          try {
+               const respone = await walletModel.findOne({
+                    id_user: id_user,
+               });
+               if (!respone) {
+                    return {
+                         success: false,
+                         mes: 'Không tìm thấy ví',
+                    };
+               } else {
+                    return {
+                         success: true,
+                         mes: 'lấy ví thành công',
+                         wallet: respone,
+                    };
+               }
+          } catch (error) {
+               return {
+                    success: false,
+                    mes: 'lỗi server',
+                    error: error,
+               };
+          }
+     };
 }
