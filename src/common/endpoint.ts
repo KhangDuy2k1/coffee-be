@@ -30,15 +30,19 @@ enum Endpoint {
      RECEIVED_ORDER = '/received/:id',
      TOTAL_CANCLE = '/totalcancle',
      DELETE_ORDER = '/deleteorder/:id',
-     GET_ALL_ORDER = '/orders',
+     GET_ALL_ORDER_USER = '/orders',
+     GET_ALL_ORDER = '/allorders',
      TOTAL_ORDER = '/totalorder',
-
      //discount
      CREATE_DISCOUNT = '/adddiscount',
      GET_ALLDISCOUNT = '/discount',
      DELETE_DISCOUNT = '/deletediscount/:id',
      //Reviews
      REVIEWS_COFFEE = '/reviews/:id',
-     STARS_MEDIUM = '/starmedium/:id_coffee',
+     //Wallet
+     CREATE_WALLET = '/createwl',
+     LOADED_MONEY = '/loadedmoney',
+     REFUND = '/refund',
 }
+
 export default Endpoint;

@@ -3,14 +3,12 @@ import { IStar } from './iStar';
 const starSchema = new mongoose.Schema<IStar>(
      {
           id_user: {
-               type: String,
+               type: mongoose.Types.ObjectId,
                ref: 'User',
-               required: true,
           },
           id_coffee: {
-               type: String,
+               type: mongoose.Types.ObjectId,
                ref: 'CoffeeItem',
-               required: true,
           },
           stars: {
                type: Number,

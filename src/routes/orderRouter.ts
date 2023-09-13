@@ -22,7 +22,7 @@ orderRouter.delete(
      orderCtr.deleteOrder
 );
 orderRouter.get(
-     Endpoint.GET_ALL_ORDER,
+     Endpoint.GET_ALL_ORDER_USER,
      authMiddleware.VerifyAccount,
      orderCtr.orders
 );
@@ -48,4 +48,10 @@ orderRouter.put(
      Endpoint.RECEIVED_ORDER,
      authMiddleware.VerifyAccount,
      orderCtr.receivedOrder
+);
+orderRouter.get(
+     Endpoint.GET_ALL_ORDER,
+     authMiddleware.VerifyAccount,
+     authMiddleware.isAdmin,
+     orderCtr.getAllOrders
 );

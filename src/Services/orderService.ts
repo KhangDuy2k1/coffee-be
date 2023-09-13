@@ -41,9 +41,8 @@ export class OrderService {
           ordeDeleted?: IOrder;
      }> => {
           try {
-               const orderDeleted = await OrderModel.findByIdAndDelete(
-                    order_id
-               );
+               const orderDeleted =
+                    await OrderModel.findByIdAndDelete(order_id);
                if (!orderDeleted) {
                     return {
                          success: false,
@@ -196,6 +195,23 @@ export class OrderService {
                     };
                }
           } catch (error) {
+               return {
+                    success: false,
+                    error: error,
+               };
+          }
+     };
+     getAllOrder = async () => {
+          try {
+               const respone = await OrderModel.find()
+                    .populate('user_id')
+                    .populate('coffeeItem_id');
+               return {
+                    success: true,
+                    allOrder: respone,
+               };
+          } catch (error) {
+               console.error(error);
                return {
                     success: false,
                     error: error,
