@@ -16,8 +16,8 @@ walletRouter.put(
      authMiddleware.VerifyAccount,
      walletController.loadedMoney
 );
-walletRouter.post(
+walletRouter.put(
      Endpoint.REFUND,
      authMiddleware.VerifyAccount,
-     walletController.refund
+     walletController.cancle
 );

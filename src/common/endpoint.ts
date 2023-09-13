@@ -42,7 +42,7 @@ enum Endpoint {
      //Wallet
      CREATE_WALLET = '/createwl',
      LOADED_MONEY = '/loadedmoney',
-     REFUND = '/refund',
+     REFUND = '/refund/:id_order',
 }
 
 export default Endpoint;

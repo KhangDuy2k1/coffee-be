@@ -43,6 +43,7 @@ export class WalletController {
                     res.json({
                          success: true,
                          mes: 'nạp tiền thành công',
+                         wallet: response.walletLoaded,
                     })
                );
           } else if (!response.error) {
@@ -64,10 +65,14 @@ export class WalletController {
                );
           }
      };
-     refund = async (req: Request, res: Response) => {
+     cancle = async (req: Request, res: Response) => {
           const id_user: string = (req as any).user._id;
           const id_order: string = req.params.id_order;
-          const respone = await walletService.refund(id_user, id_order);
+          // console.log(id_user);
+          // console.log(id_order);
+
+          const respone = await walletService.cancle(id_user, id_order);
+          console.log(respone);
           if (respone.mes === 'không tìm thấy id đơn hàng') {
                return (
                     res.status(StatusCode.BAD_REQUEST),

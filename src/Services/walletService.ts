@@ -8,7 +8,8 @@ export class WalletService {
                const findWallet = await walletModel.find({
                     id_user: id_user,
                });
-               if (findWallet) {
+               console.log(findWallet);
+               if (findWallet.length > 0) {
                     return {
                          success: false,
                          mes: 'đã tạo ví',
@@ -32,32 +33,40 @@ export class WalletService {
      };
      loadedMoney = async (id_user: string, money: number) => {
           try {
-               const respone: any = await walletModel.find({
+               const response: any = await walletModel.findOne({
                     id_user: id_user,
                });
-               if (!respone) {
+               if (!response) {
                     return {
                          success: false,
                          mes: 'chưa có ví',
                     };
                } else {
-                    let beforeNumberMoney: number = respone.amountMoney;
+                    console.log(response.amountMoney);
+                    let beforeNumberMoney = response.amountMoney;
+
                     let afferNumberMoney: number = beforeNumberMoney + money;
-                    respone.amountMoney = afferNumberMoney;
-                    await respone.save();
+                    console.log(money);
+                    console.log(afferNumberMoney);
+                    const reponseLoadedMoney =
+                         await walletModel.findByIdAndUpdate(response._id, {
+                              amountMoney: afferNumberMoney,
+                         });
                     return {
                          success: true,
                          mes: 'nạp tiền thành công',
+                         walletLoaded: reponseLoadedMoney,
                     };
                }
           } catch (error) {
+               console.error(error);
                return {
                     success: false,
                     error: error,
                };
           }
      };
-     refund = async (id_user: string, id_order: string) => {
+     cancle = async (id_user: string, id_order: string) => {
           try {
                const order: any =
                     await OrderModel.findById(id_order).populate(
@@ -70,7 +79,7 @@ export class WalletService {
                     };
                } else {
                     let priceCoffee: number = order.coffeeItem_id.price;
-                    const userWallet: any = await walletModel.find({
+                    const userWallet: any = await walletModel.findOne({
                          id_user: id_user,
                     });
                     if (!userWallet) {
@@ -84,6 +93,8 @@ export class WalletService {
                               tienHienCo + priceCoffee * order.quantity;
                          userWallet.amountMoney = tienSaukhiHoan;
                          const walletAfter = await userWallet.save();
+                         order.status = 'đã hủy';
+                         await order.save();
                          return {
                               success: true,
                               mes: 'hoàn tiền thành công',
