@@ -14,7 +14,6 @@ enum Endpoint {
      // ======================Coffee==============================
      FIND_COFFEE = '/search', //tìm kiếm cà phê theo tên
      ADD_COFFEE = '/addcoffee', //thêm cà phê (admin)
-     ADD_CATEGORY = '/addcategory', //thêm loại cà phê (admin)
      DELETE_COFFEE = '/deletecoffee/:id', //xóa cà phê theo id(admin)
      GET_ALL_COFFEE = '/getallcoffee', //lấy tất cả cà phê
      UPDATE_COFFEE = '/updatecoffee/:id', //cập nhật cà phê (admin)
@@ -25,9 +24,10 @@ enum Endpoint {
      //=====================================================================
 
      //=========================Category===================================
-     UPDATE_CATEGORY = '/updatecategory/:category_id', //cập nhật loại cà phê
-     DELETE_CATEGORY = '/deletecategory/:category_id', //xóa loại cà phê
-     GET_ALL_CATEGORY = '/getallcategory', //lấy tất cả loại cà phê
+     UPDATE_CATEGORY = '/updatecategory/:category_id',
+     ADD_CATEGORY = '/addcategory', //thêm loại cà phê 
+     DELETE_CATEGORY = '/deletecategory/:category_id',
+     GET_ALL_CATEGORY = '/getallcategory',
      //=====================================================================
 
      //==========================order======================================

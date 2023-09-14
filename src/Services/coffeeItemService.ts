@@ -5,7 +5,6 @@ class CoffeeItemService {
           name: string;
           price: number;
           volume: number;
-          stars: number;
           image: string;
           desc: string;
           category?: string;
@@ -104,7 +103,9 @@ class CoffeeItemService {
      };
      getAllCoffee = async () => {
           try {
-               const allCoffee = await CoffeeItemModel.find({});
+               const allCoffee = await CoffeeItemModel.find({}).populate(
+                    'category'
+               );
                return {
                     success: true,
                     allCoffee: allCoffee,
@@ -175,10 +176,11 @@ class CoffeeItemService {
                } else {
                     User_liked?.likedCoffeeItem.push(params.coffee_id);
                     const user_liked = await User_liked?.save();
+                    console.log(user_liked);
                     return {
-                         userLiked: user_liked?.populate('likedCoffeeItem'),
                          success: true,
                          mes: 'đã liked Coffee',
+                         userLiked: user_liked,
                     };
                }
           } catch (error: any) {
@@ -212,9 +214,9 @@ class CoffeeItemService {
                     console.log(User_unlike.likedCoffeeItem);
                     await User_unlike.save();
                     return {
-                         User_unlike: User_unlike,
                          success: true,
                          mes: 'unliked thanh cong',
+                         User_unlike: User_unlike,
                     };
                }
           } catch (error: any) {

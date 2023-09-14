@@ -13,31 +13,22 @@ export class StarController {
                stars
           );
           if (respone.success) {
-               return (
-                    res.status(StatusCode.OK),
-                    res.json({
-                         success: true,
-                         mes: 'đánh giá thành công',
-                         coffeeReviews: respone.coffeeReviews,
-                    })
-               );
+               return res.status(StatusCode.OK).json({
+                    success: true,
+                    mes: 'đánh giá thành công',
+                    coffeeReviews: respone.coffeeReviews,
+               });
           } else if (!respone.error) {
-               return (
-                    res.status(StatusCode.BAD_REQUEST),
-                    res.json({
-                         success: false,
-                         mes: respone.mes,
-                    })
-               );
+               return res.status(StatusCode.BAD_REQUEST).json({
+                    success: false,
+                    mes: respone.mes,
+               });
           } else {
-               return (
-                    res.status(StatusCode.SERVER_ERROR),
-                    res.json({
-                         success: false,
-                         mes: 'đánh giá thất bại',
-                         error: respone.error,
-                    })
-               );
+               return res.status(StatusCode.SERVER_ERROR).json({
+                    success: false,
+                    mes: 'đánh giá thất bại',
+                    error: respone.error,
+               });
           }
      };
 }

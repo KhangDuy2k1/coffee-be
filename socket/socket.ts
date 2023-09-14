@@ -11,13 +11,15 @@ export class RunSocket {
      }
      setup = () => {
           this.io.on('connection', (socket) => {
-               console.log('connected');
+               const id = socket.id;
                socket.on('order-success', (order: string) => {
                     console.log('đặt hàng thành công', order);
-                    this.io.emit(
-                         'order-success-notifycation',
-                         `đơn hàng ${order} được đặt thành công`
-                    );
+                    this.io
+                         .to(id)
+                         .emit(
+                              'order-success-notifycation',
+                              `đơn hàng ${order} được đặt thành công`
+                         );
                });
           });
      };

@@ -23,14 +23,14 @@ export class CategoryCtrl {
                     category: response.categogy,
                };
 
-               return res.status(StatusCode.OK), res.json(resSuccess);
+               return res.status(StatusCode.OK).json(resSuccess);
           } else {
                const resFail: ResJson = {
                     success: false,
                     mes: 'lỗi server',
                     error: response?.error,
                };
-               return res.status(StatusCode.SERVER_ERROR), res.json(resFail);
+               return res.status(StatusCode.SERVER_ERROR).json(resFail);
           }
      };
      updateCategory = async (
@@ -47,20 +47,20 @@ export class CategoryCtrl {
                     mes: 'update thanh cong',
                     category: response.categogy,
                };
-               return res.status(StatusCode.BAD_REQUEST), res.json(resSuccess);
+               return res.status(StatusCode.BAD_REQUEST).json(resSuccess);
           } else if (response.error) {
                const resError: ResJson = {
                     success: false,
                     mes: 'co loi xay ra',
                     error: response.error,
                };
-               return res.status(StatusCode.SERVER_ERROR), res.json(resError);
+               return res.status(StatusCode.SERVER_ERROR).json(resError);
           } else {
                const resFail: ResJson = {
                     success: false,
                     mes: 'khong tim thay coffee can update',
                };
-               return res.status(StatusCode.BAD_REQUEST), res.json(resFail);
+               return res.status(StatusCode.BAD_REQUEST).json(resFail);
           }
      };
      deleteCategory = async (
@@ -76,19 +76,19 @@ export class CategoryCtrl {
                     mes: 'xoa thanh cong',
                     category: response.categogy,
                };
-               return res.status(StatusCode.OK), res.json(resSuccess);
+               return res.status(StatusCode.OK).json(resSuccess);
           } else if (response.error) {
                const resError: ResJson = {
                     success: false,
                     mes: 'xay ra loi',
                };
-               return res.status(StatusCode.OK), res.json(resError);
+               return res.status(StatusCode.OK).json(resError);
           } else {
                const resFail: ResJson = {
                     success: false,
                     mes: 'khong tim thay coffee de xoa',
                };
-               return res.status(StatusCode.BAD_REQUEST), res.json(resFail);
+               return res.status(StatusCode.BAD_REQUEST).json(resFail);
           }
      };
      getAllCategory = async (req: Request, res: Response): Promise<any> => {
@@ -107,14 +107,14 @@ export class CategoryCtrl {
                     mes: 'lay all category thanh cong',
                     allcategory: response.allcategory,
                };
-               return res.status(StatusCode.OK), res.json(resSuccess);
+               return res.status(StatusCode.OK).json(resSuccess);
           } else {
                const resError: ResAllCategory = {
                     success: false,
                     mes: 'xay ra loi',
                     error: response.error,
                };
-               return res.status(StatusCode.SERVER_ERROR), res.json(resError);
+               return res.status(StatusCode.SERVER_ERROR).json(resError);
           }
      };
 }

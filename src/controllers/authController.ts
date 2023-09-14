@@ -15,22 +15,20 @@ class AuthCtr {
                     mes: 'đăng kí thành công',
                     user: userif.user,
                };
-               return res.status(StatusCode.CREATED), res.json(resCtrSuccess);
+               return res.status(StatusCode.CREATED).json(resCtrSuccess);
           } else if (!userif.error) {
                const resCtrFail: ResAuth = {
                     success: false,
                     mes: 'email đã tồn tại',
                };
-               return res.status(StatusCode.BAD_REQUEST), res.json(resCtrFail);
+               return res.status(StatusCode.BAD_REQUEST).json(resCtrFail);
           } else {
                const resCtrError: ResAuth = {
                     success: false,
                     mes: 'đã xảy ra lỗi',
                     error: userif.error,
                };
-               return (
-                    res.status(StatusCode.SERVER_ERROR), res.json(resCtrError)
-               );
+               return res.status(StatusCode.SERVER_ERROR).json(resCtrError);
           }
      };
      Login = async (req: Request, res: Response): Promise<any> => {
@@ -44,25 +42,22 @@ class AuthCtr {
                     refreshToken: responseLogin.refreshToken,
                     user: responseLogin.user,
                };
-               return res.status(StatusCode.OK), res.json(resLoginSuccess);
+               return res.status(StatusCode.OK).json(resLoginSuccess);
           } else if (!responseLogin?.error) {
                const resLoginWrongInfo: ResAuth = {
                     success: false,
                     mes: 'sai thông tin đăng nhập vui lòng đăng nhập lại',
                };
-               return (
-                    res.status(StatusCode.BAD_REQUEST),
-                    res.json(resLoginWrongInfo)
-               );
+               return res
+                    .status(StatusCode.BAD_REQUEST)
+                    .json(resLoginWrongInfo);
           } else {
                const resLoginError: ResAuth = {
                     success: false,
                     mes: 'có lỗi xảy ra',
                     error: responseLogin.error,
                };
-               return (
-                    res.status(StatusCode.SERVER_ERROR), res.json(resLoginError)
-               );
+               return res.status(StatusCode.SERVER_ERROR).json(resLoginError);
           }
      };
      Refresh = async (req: Request, res: Response): Promise<any> => {
@@ -74,34 +69,26 @@ class AuthCtr {
                     mes: 'refreshToken thành công',
                     accessToken: responseRefreshToken.accessToken,
                };
-               return (
-                    res.status(StatusCode.OK), res.json(resRefreshTokenSucess)
-               );
+               return res.status(StatusCode.OK).json(resRefreshTokenSucess);
           } else if (responseRefreshToken.user == null) {
                const resTokenNotFound: ResAuth = {
                     success: false,
                     mes: 'Token bị gỡ bỏ',
                };
-               return (
-                    res.status(StatusCode.BAD_REQUEST),
-                    res.json(resTokenNotFound)
-               );
+               return res.status(StatusCode.BAD_REQUEST).json(resTokenNotFound);
           } else if (!responseRefreshToken.error) {
                const resTokenExpired: ResAuth = {
                     success: false,
                     mes: 'Token hết hạn',
                };
-               return (
-                    res.status(StatusCode.BAD_REQUEST),
-                    res.json(resTokenExpired)
-               );
+               return res.status(StatusCode.BAD_REQUEST).json(resTokenExpired);
           } else {
                const resError: ResAuth = {
                     success: false,
                     mes: ' xảy ra lỗi',
                     error: responseRefreshToken.error,
                };
-               return res.status(StatusCode.SERVER_ERROR), res.json(resError);
+               return res.status(StatusCode.SERVER_ERROR).json(resError);
           }
      };
      getAllUser = async (req: Request, res: Response): Promise<any> => {
@@ -112,17 +99,14 @@ class AuthCtr {
                     mes: 'lấy alluser thành công',
                     allUser: responseAllUser.allUser,
                };
-               return res.status(StatusCode.OK), res.json(resAllUserSuccess);
+               return res.status(StatusCode.OK).json(resAllUserSuccess);
           } else {
                const resAllUserError: ResAuth = {
                     success: false,
                     mes: 'xảy ra lỗi',
                     error: responseAllUser.error,
                };
-               return (
-                    res.status(StatusCode.SERVER_ERROR),
-                    res.json(resAllUserError)
-               );
+               return res.status(StatusCode.SERVER_ERROR).json(resAllUserError);
           }
      };
      updateUser = async (req: Request, res: Response): Promise<any> => {
@@ -134,31 +118,22 @@ class AuthCtr {
           } = req.body;
           const response = await authService.updateUser(id, user_update);
           if (response.success) {
-               return (
-                    res.status(StatusCode.OK),
-                    res.json({
-                         success: true,
-                         mes: 'cập nhật người dùng thành công',
-                         userUpdated: response.userUpdated,
-                    })
-               );
+               return res.status(StatusCode.OK).json({
+                    success: true,
+                    mes: 'cập nhật người dùng thành công',
+                    userUpdated: response.userUpdated,
+               });
           } else if (!response.error) {
-               return (
-                    res.status(StatusCode.BAD_REQUEST),
-                    res.json({
-                         success: false,
-                         mes: 'không tìm thấy người dùng cập nhật',
-                    })
-               );
+               return res.status(StatusCode.BAD_REQUEST).json({
+                    success: false,
+                    mes: 'không tìm thấy người dùng cập nhật',
+               });
           } else {
-               return (
-                    res.status(StatusCode.SERVER_ERROR),
-                    res.json({
-                         success: false,
-                         mes: 'lỗi server',
-                         error: response.error,
-                    })
-               );
+               return res.status(StatusCode.SERVER_ERROR).json({
+                    success: false,
+                    mes: 'lỗi server',
+                    error: response.error,
+               });
           }
      };
      deleteUser = async (
@@ -174,98 +149,71 @@ class AuthCtr {
                     mes: 'xóa user thành công',
                     user: resDeleteUser.user,
                };
-               return res.status(StatusCode.OK), res.json(resDeleteSuccess);
+               return res.status(StatusCode.OK).json(resDeleteSuccess);
           } else {
                const resDeleteError: ResAuth = {
                     success: false,
                     mes: 'xảy ra lỗi',
                     error: resDeleteUser.error,
                };
-               return (
-                    res.status(StatusCode.SERVER_ERROR),
-                    res.json(resDeleteError)
-               );
+               return res.status(StatusCode.SERVER_ERROR).json(resDeleteError);
           }
      };
      getUserLogin = async (req: Request, res: Response) => {
           const id_user = (req as any).user._id;
           const respone = await authService.getUserLogin(id_user);
           if (respone.success) {
-               return (
-                    res.status(StatusCode.OK),
-                    res.json({
-                         success: true,
-                         mes: respone.mes,
-                         user: respone.user,
-                    })
-               );
+               return res.status(StatusCode.OK).json({
+                    success: true,
+                    mes: respone.mes,
+                    user: respone.user,
+               });
           } else if (!respone.error) {
-               return (
-                    res.status(StatusCode.BAD_REQUEST),
-                    res.json({
-                         success: false,
-                         mes: respone.mes,
-                    })
-               );
+               return res.status(StatusCode.BAD_REQUEST).json({
+                    success: false,
+                    mes: respone.mes,
+               });
           } else {
-               return (
-                    res.status(StatusCode.SERVER_ERROR),
-                    res.json({
-                         success: false,
-                         mes: respone.mes,
-                         error: respone.error,
-                    })
-               );
+               return res.status(StatusCode.SERVER_ERROR).json({
+                    success: false,
+                    mes: respone.mes,
+                    error: respone.error,
+               });
           }
      };
      getUserById = async (req: Request, res: Response): Promise<any> => {
           const id = req.params.id;
           const response = await authService.getUserById(id);
           if (response.success) {
-               return (
-                    res.status(StatusCode.OK),
-                    res.json({
-                         mes: 'lay user thanh cong ',
-                         user: response.user,
-                    })
-               );
+               return res.status(StatusCode.OK).json({
+                    mes: 'lay user thanh cong ',
+                    user: response.user,
+               });
           } else if (!response.error) {
-               return (
-                    res.status(StatusCode.BAD_REQUEST),
-                    res.json({
-                         mes: 'khong tim thay user',
-                    })
-               );
+               return res.status(StatusCode.BAD_REQUEST).json({
+                    mes: 'khong tim thay user',
+               });
           } else {
-               return (
-                    res.status(StatusCode.SERVER_ERROR),
-                    res.json({
-                         mes: 'loi server',
-                         error: response.error,
-                    })
-               );
+               return res.status(StatusCode.SERVER_ERROR).json({
+                    mes: 'loi server',
+                    error: response.error,
+               });
           }
      };
      getTotalUser = async (req: Request, res: Response) => {
           const response = await authService.getTotalUser();
           if (response.success) {
-               return (
-                    res.status(StatusCode.OK),
-                    res.json({
-                         success: true,
-                         mes: 'lấy tổng người dùng thành công',
-                         totalUser: response.totalUser,
-                    })
-               );
+               return res.status(StatusCode.OK).json({
+                    success: true,
+                    mes: 'lấy tổng người dùng thành công',
+                    totalUser: response.totalUser,
+               });
           } else {
-               return (
-                    res.status(StatusCode.SERVER_ERROR),
-                    res.json({
-                         success: false,
-                         mes: 'lỗi server',
-                         error: response.error,
-                    })
-               );
+               return res.status(StatusCode.SERVER_ERROR).json({
+                    success: false,
+                    mes: 'lỗi server',
+                    error: response.error,
+               });
           }
      };
 }
