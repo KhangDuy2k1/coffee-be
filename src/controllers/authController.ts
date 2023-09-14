@@ -156,6 +156,7 @@ class AuthCtr {
                     res.json({
                          success: false,
                          mes: 'lỗi server',
+                         error: response.error,
                     })
                );
           }
@@ -183,6 +184,37 @@ class AuthCtr {
                return (
                     res.status(StatusCode.SERVER_ERROR),
                     res.json(resDeleteError)
+               );
+          }
+     };
+     getUserLogin = async (req: Request, res: Response) => {
+          const id_user = (req as any).user._id;
+          const respone = await authService.getUserLogin(id_user);
+          if (respone.success) {
+               return (
+                    res.status(StatusCode.OK),
+                    res.json({
+                         success: true,
+                         mes: respone.mes,
+                         user: respone.user,
+                    })
+               );
+          } else if (!respone.error) {
+               return (
+                    res.status(StatusCode.BAD_REQUEST),
+                    res.json({
+                         success: false,
+                         mes: respone.mes,
+                    })
+               );
+          } else {
+               return (
+                    res.status(StatusCode.SERVER_ERROR),
+                    res.json({
+                         success: false,
+                         mes: respone.mes,
+                         error: respone.error,
+                    })
                );
           }
      };
@@ -220,6 +252,7 @@ class AuthCtr {
                return (
                     res.status(StatusCode.OK),
                     res.json({
+                         success: true,
                          mes: 'lấy tổng người dùng thành công',
                          totalUser: response.totalUser,
                     })
@@ -228,7 +261,9 @@ class AuthCtr {
                return (
                     res.status(StatusCode.SERVER_ERROR),
                     res.json({
+                         success: false,
                          mes: 'lỗi server',
+                         error: response.error,
                     })
                );
           }

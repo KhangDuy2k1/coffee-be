@@ -17,7 +17,7 @@ walletRouter.put(
      walletController.loadedMoney
 );
 walletRouter.put(
-     Endpoint.REFUND,
+     Endpoint.CANCLE_ORDER_PAY,
      authMiddleware.VerifyAccount,
      walletController.cancle
 );
@@ -25,4 +25,9 @@ walletRouter.get(
      Endpoint.GET_WALLET_USER,
      authMiddleware.VerifyAccount,
      walletController.getWalletUser
+);
+walletRouter.post(
+     Endpoint.PAYMENT,
+     authMiddleware.VerifyAccount,
+     walletController.pay
 );

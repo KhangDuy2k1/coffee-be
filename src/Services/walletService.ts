@@ -1,3 +1,4 @@
+import e from 'express';
 import OrderModel from '../models/OrderModel';
 import UserModel from '../models/UserModel';
 import walletModel from '../models/wallet';
@@ -58,11 +59,10 @@ export class WalletService {
                          walletLoaded: reponseLoadedMoney,
                     };
                }
-          } catch (error) {
-               console.error(error);
+          } catch (error: any) {
                return {
                     success: false,
-                    error: error,
+                    error: error.message,
                };
           }
      };
@@ -102,10 +102,10 @@ export class WalletService {
                          };
                     }
                }
-          } catch (error) {
+          } catch (error: any) {
                return {
                     success: false,
-                    error: error,
+                    error: error.message,
                };
           }
      };
@@ -126,11 +126,62 @@ export class WalletService {
                          wallet: respone,
                     };
                }
-          } catch (error) {
+          } catch (error: any) {
                return {
                     success: false,
                     mes: 'lỗi server',
-                    error: error,
+                    error: error.message,
+               };
+          }
+     };
+     pay = async (
+          id_user: string,
+          id_coffee: string,
+          orderDetail: {
+               quantity: number;
+               total: number;
+          }
+     ) => {
+          try {
+               const walletUser = await walletModel.findOne({
+                    id_user: id_user,
+               });
+               if (!walletUser) {
+                    return {
+                         success: false,
+                         mes: 'không có ví để thanh toán',
+                    };
+               } else {
+                    if (walletUser.amountMoney < orderDetail.total) {
+                         return {
+                              success: false,
+                              mes: 'tiền trong ví không đủ để thanh toán',
+                         };
+                    } else {
+                         let moneyAfter =
+                              walletUser.amountMoney - orderDetail.total;
+                         walletUser.amountMoney = moneyAfter;
+                         await walletUser.save();
+                         const creatOrder = await OrderModel.create({
+                              coffeeItem_id: id_coffee,
+                              user_id: id_user,
+                              quantity: orderDetail.quantity,
+                              total: orderDetail.total,
+                              status: 'đã thanh toán',
+                         });
+                         return {
+                              success: true,
+                              mes: 'thanh toán online thành công',
+                              wallet: walletUser,
+                              order: creatOrder,
+                         };
+                    }
+               }
+          } catch (error: any) {
+               return {
+                    success: false,
+                    mes: 'có lỗi xảy ra',
+                    error: error.message,
                };
           }
      };

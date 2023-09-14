@@ -3,7 +3,6 @@ import * as dotenv from 'dotenv';
 import Connect from './config/database';
 dotenv.config();
 import AuthRouter from './routes/authRouter';
-import { discountRouter } from './controllers/discountController';
 import { CategoryRouter } from './routes/categoryRouter';
 import { orderRouter } from './routes/orderRouter';
 import { ErrorUrl } from './middlewares/errorMiddleware';
@@ -37,7 +36,6 @@ class App {
           this.app.use('/api/user', AuthRouter);
           this.app.use('/api/coffee', CoffeeItemRouter);
           this.app.use('/api/category', CategoryRouter);
-          this.app.use('/api/discount', discountRouter);
           this.app.use('/api/order', orderRouter);
           this.app.use('/api/reviews', reviewsRouter);
           this.app.use('/api/wallet', walletRouter);

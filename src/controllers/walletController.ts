@@ -140,4 +140,53 @@ export class WalletController {
                );
           }
      };
+     pay = async (req: Request, res: Response) => {
+          const id_user: string = (req as any).user._id;
+          const id_coffee: string = req.params.id_coffee;
+          const bodyDetail: {
+               quantity: number;
+               total: number;
+          } = req.body;
+          const respone = await walletService.pay(
+               id_user,
+               id_coffee,
+               bodyDetail
+          );
+          if (respone.success) {
+               return (
+                    res.status(StatusCode.OK),
+                    res.json({
+                         success: true,
+                         mes: respone.mes,
+                         wallet: respone.wallet,
+                         order: respone.order,
+                    })
+               );
+          } else if (respone.mes === 'không có ví để thanh toán') {
+               return (
+                    res.status(StatusCode.PAYMENT_REQUIRED),
+                    res.json({
+                         success: false,
+                         mes: respone.mes,
+                    })
+               );
+          } else if (respone.mes === 'tiền trong ví không đủ để thanh toán') {
+               return (
+                    res.status(StatusCode.PAYMENT_REQUIRED),
+                    res.json({
+                         success: false,
+                         mes: respone.mes,
+                    })
+               );
+          } else {
+               return (
+                    res.status(StatusCode.SERVER_ERROR),
+                    res.json({
+                         success: false,
+                         mes: respone.mes,
+                         error: respone.error,
+                    })
+               );
+          }
+     };
 }

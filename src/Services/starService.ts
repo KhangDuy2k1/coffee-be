@@ -37,11 +37,11 @@ export class StarService {
                     mes: 'đánh giá thành công',
                     coffeeReviews: responseCoffee,
                };
-          } catch (error) {
+          } catch (error: any) {
                return {
                     success: false,
                     mes: 'đánh giá thất bại',
-                    error: error,
+                    error: error.message,
                };
           }
      };

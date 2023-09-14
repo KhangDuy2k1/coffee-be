@@ -16,14 +16,25 @@ class CoffeeITemCtr {
                category?: string;
           } = req?.body;
           const createCoffee = await CoffeeItem.createCoffee(body);
-          return (
-               res.status(StatusCode.CREATED),
-               res.json({
-                    success: true,
-                    mes: 'them coffee thanh cong',
-                    coffee: createCoffee?.coffeeCreaeted,
-               })
-          );
+          if (createCoffee.success) {
+               return (
+                    res.status(StatusCode.CREATED),
+                    res.json({
+                         success: true,
+                         mes: 'them coffee thanh cong',
+                         coffee: createCoffee?.coffeeCreaeted,
+                    })
+               );
+          } else {
+               return (
+                    res.status(StatusCode.SERVER_ERROR),
+                    res.json({
+                         success: false,
+                         mes: 'lỗi server',
+                         coffee: createCoffee.error,
+                    })
+               );
+          }
      };
      updateCoffee = async (req: Request, res: Response) => {
           const body: {
@@ -45,13 +56,22 @@ class CoffeeITemCtr {
                          mes: 'khong the update Coffee',
                     })
                );
-          } else {
+          } else if (updatedCoffee.success) {
                return (
                     res.status(StatusCode.OK),
                     res.json({
                          success: true,
                          mes: 'cap nhat thanh cong',
                          coffee: updatedCoffee.coffee,
+                    })
+               );
+          } else {
+               return (
+                    res.status(StatusCode.SERVER_ERROR),
+                    res.json({
+                         success: false,
+                         mes: 'lỗi server',
+                         error: updatedCoffee.error,
                     })
                );
           }
@@ -64,22 +84,55 @@ class CoffeeITemCtr {
           });
           console.log(deleteCoffee);
           if (deleteCoffee.success) {
-               return res.status(StatusCode.OK), res.json(deleteCoffee);
+               return (
+                    res.status(StatusCode.OK),
+                    res.json({
+                         success: true,
+                         mes: 'xóa thành công',
+                         deleteCoffee: deleteCoffee.Coffee,
+                    })
+               );
           } else if (deleteCoffee.Coffee == null) {
-               return res.status(StatusCode.NOT_FOUND), res.json(deleteCoffee);
+               return (
+                    res.status(StatusCode.NOT_FOUND),
+                    res.json({
+                         success: false,
+                         mes: 'coffee không có trong cơ sở dữ liệu',
+                    })
+               );
+          } else {
+               return (
+                    res.status(StatusCode.SERVER_ERROR),
+                    res.json({
+                         success: false,
+                         mes: 'lỗi server',
+                         error: deleteCoffee.error,
+                    })
+               );
           }
-          return res.status(StatusCode.SERVER_ERROR), res.json(deleteCoffee);
      };
+
      getAllCoffee = async (req: Request, res: Response) => {
           const allCoffee = await CoffeeItem.getAllCoffee();
-          return (
-               res.status(StatusCode.OK),
-               res.json({
-                    mes: 'get Coffee thanh cong',
-                    allCoffee: allCoffee,
-                    success: true,
-               })
-          );
+          if (allCoffee.success) {
+               return (
+                    res.status(StatusCode.OK),
+                    res.json({
+                         success: true,
+                         mes: 'get Coffee thanh cong',
+                         allCoffee: allCoffee,
+                    })
+               );
+          } else {
+               return (
+                    res.status(StatusCode.SERVER_ERROR),
+                    res.json({
+                         success: false,
+                         mes: 'lỗi server',
+                         error: allCoffee.error,
+                    })
+               );
+          }
      };
      getCoffeeById = async (req: Request, res: Response) => {
           const { id } = req.params;
@@ -130,20 +183,30 @@ class CoffeeITemCtr {
                coffee_id: coffee_id,
           });
           console.log(response);
-          if (!response?.success) {
-               return (
-                    res.status(StatusCode.BAD_REQUEST),
-                    res.json({
-                         mes: response?.mes,
-                    })
-               );
-          } else {
+          if (response.success) {
                return (
                     res.status(StatusCode.OK),
                     res.json({
                          userliked: response.userLiked,
                          success: true,
                          mes: response.mes,
+                    })
+               );
+          } else if (!response.error) {
+               return (
+                    res.status(StatusCode.BAD_REQUEST),
+                    res.json({
+                         success: false,
+                         mes: response.mes,
+                    })
+               );
+          } else {
+               return (
+                    res.status(StatusCode.SERVER_ERROR),
+                    res.json({
+                         success: false,
+                         mes: response.mes,
+                         error: response.error,
                     })
                );
           }
@@ -157,7 +220,7 @@ class CoffeeITemCtr {
           const params: { coffee_id: string } = req.params;
           CheckId(params.coffee_id);
           const response = await CoffeeItem.unlikeCoffee(user_id, params);
-          if (response?.success) {
+          if (response.success) {
                return (
                     res.status(StatusCode.OK),
                     res.json({
@@ -166,12 +229,21 @@ class CoffeeITemCtr {
                          mes: response.mes,
                     })
                );
-          } else {
+          } else if (!response.error) {
                return (
                     res.status(StatusCode.BAD_REQUEST),
                     res.json({
                          success: false,
-                         mes: response?.mes,
+                         mes: response.mes,
+                    })
+               );
+          } else {
+               return (
+                    res.status(StatusCode.SERVER_ERROR),
+                    res.json({
+                         success: false,
+                         mes: response.mes,
+                         error: response.error,
                     })
                );
           }
@@ -179,21 +251,30 @@ class CoffeeITemCtr {
      getCoffeeLiked = async (req: Request, res: Response) => {
           const user_id: string = (req as any).user._id;
           const response = await CoffeeItem.getCoffeeLiked(user_id);
-          if (!response?.success) {
-               return (
-                    res.status(StatusCode.NOT_FOUND),
-                    res.json({
-                         success: false,
-                         mes: 'chưa có coffee được like',
-                    })
-               );
-          } else {
+          if (response?.success) {
                return (
                     res.status(StatusCode.OK),
                     res.json({
                          success: true,
-                         mes: 'thành công',
+                         mes: 'like thành công',
                          listCoffeeLiked: response.listCoffeeLike,
+                    })
+               );
+          } else if (!response?.error) {
+               return (
+                    res.status(StatusCode.NOT_FOUND),
+                    res.json({
+                         success: false,
+                         mes: 'chưa like coffee nào',
+                    })
+               );
+          } else {
+               return (
+                    res.status(StatusCode.SERVER_ERROR),
+                    res.json({
+                         success: false,
+                         mes: response.mes,
+                         error: response.error,
                     })
                );
           }

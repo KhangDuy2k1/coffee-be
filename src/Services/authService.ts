@@ -33,10 +33,9 @@ class AuthService {
                     user: createUser,
                };
           } catch (error: any) {
-               console.error(error);
                return {
                     success: false,
-                    error: error,
+                    error: error.message,
                };
           }
      };
@@ -88,7 +87,7 @@ class AuthService {
                console.error(error);
                return {
                     success: false,
-                    error: error,
+                    error: error.message,
                };
           }
      };
@@ -127,24 +126,21 @@ class AuthService {
                return {
                     success: false,
                     mes: 'xảy ra lỗi',
-                    error: error,
+                    error: error.message,
                };
           }
      };
      getalluser = async (): Promise<ResAuth> => {
           try {
-               const allUser: IUser[] = await UserModel.find({}).populate(
-                    'likedCoffeeItem'
-               );
+               const allUser: IUser[] = await UserModel.find({});
                return {
                     success: true,
                     allUser: allUser,
                };
-          } catch (err) {
-               console.error(err);
+          } catch (error: any) {
                return {
                     success: false,
-                    error: err,
+                    error: error.message,
                };
           }
      };
@@ -179,10 +175,10 @@ class AuthService {
                          userUpdated: userUpdated,
                     };
                }
-          } catch (error) {
+          } catch (error: any) {
                return {
                     success: false,
-                    error: error,
+                    error: error.message,
                };
           }
      };
@@ -199,7 +195,30 @@ class AuthService {
           } catch (error: any) {
                return {
                     success: false,
-                    error: error,
+                    error: error.message,
+               };
+          }
+     };
+     getUserLogin = async (id_user: string) => {
+          try {
+               const response = await UserModel.findById(id_user);
+               if (!response) {
+                    return {
+                         success: false,
+                         mes: 'không tìm thấy user',
+                    };
+               } else {
+                    return {
+                         success: true,
+                         mes: 'lấy thông tin người dùng đang đăng nhập thành công',
+                         user: response,
+                    };
+               }
+          } catch (error: any) {
+               return {
+                    success: false,
+                    mes: 'lỗi server',
+                    error: error.message,
                };
           }
      };
@@ -217,10 +236,10 @@ class AuthService {
                          user: user,
                     };
                }
-          } catch (error) {
+          } catch (error: any) {
                return {
                     success: false,
-                    error: error,
+                    error: error.message,
                };
           }
      };
@@ -231,10 +250,10 @@ class AuthService {
                     success: true,
                     totalUser: totalUser,
                };
-          } catch (error) {
+          } catch (error: any) {
                return {
                     success: false,
-                    error: error,
+                    error: error.message,
                };
           }
      };

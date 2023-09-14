@@ -162,6 +162,7 @@ export class OrderController {
                     res.json({
                          success: false,
                          mes: 'xảy ra lỗi',
+                         error: response.error,
                     })
                );
           }
@@ -178,11 +179,14 @@ export class OrderController {
                     })
                );
           } else {
-               return {
-                    success: false,
-                    mes: 'có lỗi',
-                    error: response.error,
-               };
+               return (
+                    res.status(StatusCode.SERVER_ERROR),
+                    res.json({
+                         success: false,
+                         mes: 'có lỗi',
+                         error: response.error,
+                    })
+               );
           }
      };
      receivedOrder = async (req: Request, res: Response): Promise<any> => {

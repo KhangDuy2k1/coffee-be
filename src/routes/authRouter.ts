@@ -41,6 +41,11 @@ AuthRouter.delete(
      authCtr.deleteUser
 );
 AuthRouter.get(
+     Endpoint.GET_USER_LOGIN,
+     middlewaresAuth.VerifyAccount,
+     authCtr.getUserLogin
+);
+AuthRouter.get(
      Endpoint.GET_USER_BY_ID,
      middlewaresAuth.VerifyAccount,
      middlewaresAuth.isAdmin,

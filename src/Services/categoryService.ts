@@ -9,10 +9,10 @@ export class CategoryService {
                     success: true,
                     categogy: newCategory,
                };
-          } catch (err) {
+          } catch (error: any) {
                return {
                     success: false,
-                    error: err,
+                    error: error.message,
                };
           }
      };
@@ -38,11 +38,10 @@ export class CategoryService {
                     success: true,
                     categogy: newCategory,
                };
-          } catch (error) {
-               console.log(error);
+          } catch (error: any) {
                return {
                     success: false,
-                    error: error,
+                    error: error.message,
                };
           }
      };
@@ -62,11 +61,10 @@ export class CategoryService {
                          categogy: CategoryDeleted,
                     };
                }
-          } catch (error) {
-               console.error(error);
+          } catch (error: any) {
                return {
                     success: false,
-                    error: error,
+                    error: error.message,
                };
           }
      };
@@ -81,11 +79,11 @@ export class CategoryService {
                     success: true,
                     allcategory: AllCategory,
                };
-          } catch (error) {
+          } catch (error: any) {
                console.error(error);
                return {
                     success: false,
-                    error: error,
+                    error: error.message,
                };
           }
      };

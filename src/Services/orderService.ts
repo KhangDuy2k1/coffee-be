@@ -25,10 +25,10 @@ export class OrderService {
                     success: true,
                     order: orderCoffee,
                };
-          } catch (error) {
+          } catch (error: any) {
                return {
                     success: false,
-                    error: error,
+                    error: error.message,
                };
           }
      };
@@ -53,10 +53,10 @@ export class OrderService {
                          ordeDeleted: orderDeleted,
                     };
                }
-          } catch (error) {
+          } catch (error: any) {
                return {
                     success: false,
-                    error: error,
+                    error: error.message,
                };
           }
      };
@@ -79,10 +79,10 @@ export class OrderService {
                          order: allOrder,
                     };
                }
-          } catch (error) {
+          } catch (error: any) {
                return {
                     success: false,
-                    error: error,
+                    error: error.message,
                };
           }
      };
@@ -93,10 +93,10 @@ export class OrderService {
                     success: true,
                     total: total,
                };
-          } catch (error) {
+          } catch (error: any) {
                return {
                     success: false,
-                    error: error,
+                    error: error.message,
                };
           }
      };
@@ -120,10 +120,10 @@ export class OrderService {
                     success: true,
                     orderPaid: response,
                };
-          } catch (error) {
+          } catch (error: any) {
                return {
                     success: false,
-                    error: error,
+                    error: error.message,
                };
           }
      };
@@ -149,10 +149,10 @@ export class OrderService {
                          orderCancled: response,
                     };
                }
-          } catch (error) {
+          } catch (error: any) {
                return {
                     success: false,
-                    error: error,
+                    error: error.message,
                };
           }
      };
@@ -165,10 +165,10 @@ export class OrderService {
                     success: true,
                     totalCancled: response,
                };
-          } catch (error) {
+          } catch (error: any) {
                return {
                     success: false,
-                    error: error,
+                    error: error.message,
                };
           }
      };
@@ -194,10 +194,10 @@ export class OrderService {
                          orderReceived: response,
                     };
                }
-          } catch (error) {
+          } catch (error: any) {
                return {
                     success: false,
-                    error: error,
+                    error: error.message,
                };
           }
      };
@@ -210,11 +210,10 @@ export class OrderService {
                     success: true,
                     allOrder: respone,
                };
-          } catch (error) {
-               console.error(error);
+          } catch (error: any) {
                return {
                     success: false,
-                    error: error,
+                    error: error.message,
                };
           }
      };

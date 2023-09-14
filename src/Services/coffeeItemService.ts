@@ -13,10 +13,15 @@ class CoffeeItemService {
           try {
                const createCoffee = await CoffeeItemModel.create(body);
                return {
+                    success: true,
                     coffeeCreaeted: createCoffee,
                };
           } catch (error: any) {
                console.error(error);
+               return {
+                    success: false,
+                    error: error.message,
+               };
           }
      };
      updateCoffee = async (
@@ -53,6 +58,10 @@ class CoffeeItemService {
                }
           } catch (error: any) {
                console.error(error);
+               return {
+                    success: false,
+                    error: error.message,
+               };
           }
      };
      deleteCoffee = async (params: { id: string }) => {
@@ -97,20 +106,38 @@ class CoffeeItemService {
           try {
                const allCoffee = await CoffeeItemModel.find({});
                return {
+                    success: true,
                     allCoffee: allCoffee,
                };
           } catch (error: any) {
                console.error(error);
+               return {
+                    success: false,
+                    error: error.message,
+               };
           }
      };
      getCoffeeById = async (id: string) => {
           try {
                const CoffeeById = await CoffeeItemModel.findById(id);
-               return {
-                    Coffee: CoffeeById,
-               };
-          } catch (error) {
+               if (!CoffeeById) {
+                    return {
+                         success: false,
+                         mes: 'không tìm thấy id',
+                    };
+               } else {
+                    return {
+                         success: true,
+                         mes: 'lấy coffee thành công',
+                         coffee: CoffeeById,
+                    };
+               }
+          } catch (error: any) {
                console.error(error);
+               return {
+                    success: false,
+                    error: error.message,
+               };
           }
      };
      SearchCoffee = async (keyword: string) => {
@@ -131,6 +158,10 @@ class CoffeeItemService {
                }
           } catch (error: any) {
                console.error(error);
+               return {
+                    success: false,
+                    error: error.message,
+               };
           }
      };
      likeCoffee = async (user_id: string, params: { coffee_id: string }) => {
@@ -150,8 +181,13 @@ class CoffeeItemService {
                          mes: 'đã liked Coffee',
                     };
                }
-          } catch (error) {
+          } catch (error: any) {
                console.error(error);
+               return {
+                    success: false,
+                    mes: 'lỗi server',
+                    error: error.message,
+               };
           }
      };
      unlikeCoffee = async (user_id: string, params: { coffee_id: string }) => {
@@ -181,8 +217,13 @@ class CoffeeItemService {
                          mes: 'unliked thanh cong',
                     };
                }
-          } catch (error) {
+          } catch (error: any) {
                console.error(error);
+               return {
+                    success: false,
+                    mes: 'lỗi server',
+                    error: error.message,
+               };
           }
      };
      getCoffeeLiked = async (user_id: string) => {
@@ -196,16 +237,23 @@ class CoffeeItemService {
                     if (listCoffeeLike.length == 0) {
                          return {
                               success: false,
+                              mes: 'người dùng chưa like coffee nào',
                          };
                     } else {
                          return {
                               success: true,
+                              mes: 'lấy coffee đã like thành công',
                               listCoffeeLike: listCoffeeLike,
                          };
                     }
                }
-          } catch (error) {
+          } catch (error: any) {
                console.error(error);
+               return {
+                    success: false,
+                    mes: 'lỗi server',
+                    error: error.message,
+               };
           }
      };
 }

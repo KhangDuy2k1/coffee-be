@@ -6,7 +6,7 @@ const authMiddleware = new AuthMiddleware();
 const orderCtr = new OrderController();
 export const orderRouter = express.Router();
 orderRouter.post(
-     Endpoint.ORDER_COFFEE,
+     Endpoint.ORDER_COFFEE_DIRECT,
      authMiddleware.VerifyAccount,
      orderCtr.orderCoffee
 );
@@ -34,7 +34,7 @@ orderRouter.get(
 );
 
 orderRouter.put(
-     Endpoint.CANCLE,
+     Endpoint.CANCLE_ORDER_DIRECT,
      authMiddleware.VerifyAccount,
      orderCtr.cancleOrder
 );

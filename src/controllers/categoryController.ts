@@ -88,6 +88,7 @@ export class CategoryCtrl {
                     success: false,
                     mes: 'khong tim thay coffee de xoa',
                };
+               return res.status(StatusCode.BAD_REQUEST), res.json(resFail);
           }
      };
      getAllCategory = async (req: Request, res: Response): Promise<any> => {
@@ -113,6 +114,7 @@ export class CategoryCtrl {
                     mes: 'xay ra loi',
                     error: response.error,
                };
+               return res.status(StatusCode.SERVER_ERROR), res.json(resError);
           }
      };
 }
