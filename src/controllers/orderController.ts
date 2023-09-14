@@ -108,34 +108,34 @@ export class OrderController {
                );
           }
      };
-     payOrder = async (req: Request, res: Response) => {
-          const id_user = (req as any).user._id;
-          const payOderDetail: {
-               coffeeitem_id: string;
-               quantity: number;
-               total: number;
-          } = req.body;
-          const response = await orderService.payOrder(id_user, payOderDetail);
-          if (response.success) {
-               return (
-                    res.status(StatusCode.OK),
-                    res.json({
-                         success: true,
-                         mes: 'thanh toán thành công',
-                         orderPaid: response.orderPaid,
-                    })
-               );
-          } else {
-               return (
-                    res.status(StatusCode.SERVER_ERROR),
-                    res.json({
-                         success: false,
-                         mes: 'lỗi server',
-                         error: response.error,
-                    })
-               );
-          }
-     };
+     // payOrder = async (req: Request, res: Response) => {
+     //      const id_user = (req as any).user._id;
+     //      const payOderDetail: {
+     //           coffeeitem_id: string;
+     //           quantity: number;
+     //           total: number;
+     //      } = req.body;
+     //      const response = await orderService.payOrder(id_user, payOderDetail);
+     //      if (response.success) {
+     //           return (
+     //                res.status(StatusCode.OK),
+     //                res.json({
+     //                     success: true,
+     //                     mes: 'thanh toán thành công',
+     //                     orderPaid: response.orderPaid,
+     //                })
+     //           );
+     //      } else {
+     //           return (
+     //                res.status(StatusCode.SERVER_ERROR),
+     //                res.json({
+     //                     success: false,
+     //                     mes: 'lỗi server',
+     //                     error: response.error,
+     //                })
+     //           );
+     //      }
+     // };
      cancleOrder = async (req: Request, res: Response): Promise<any> => {
           const id_order: string = req.params.id;
           const response = await orderService.cancleOrder(id_order);

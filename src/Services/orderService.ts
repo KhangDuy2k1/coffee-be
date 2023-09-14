@@ -100,33 +100,33 @@ export class OrderService {
                };
           }
      };
-     payOrder = async (
-          id_user: string,
-          orderDetail: {
-               coffeeitem_id: string;
-               quantity: number;
-               total: number;
-          }
-     ) => {
-          try {
-               const response = await OrderModel.create({
-                    user_id: id_user,
-                    coffeeItem_id: orderDetail.coffeeitem_id,
-                    quantity: orderDetail.quantity,
-                    status: 'đã thanh toán',
-                    total: orderDetail.total,
-               });
-               return {
-                    success: true,
-                    orderPaid: response,
-               };
-          } catch (error: any) {
-               return {
-                    success: false,
-                    error: error.message,
-               };
-          }
-     };
+     // payOrder = async (
+     //      id_user: string,
+     //      orderDetail: {
+     //           coffeeitem_id: string;
+     //           quantity: number;
+     //           total: number;
+     //      }
+     // ) => {
+     //      try {
+     //           const response = await OrderModel.create({
+     //                user_id: id_user,
+     //                coffeeItem_id: orderDetail.coffeeitem_id,
+     //                quantity: orderDetail.quantity,
+     //                status: 'đã thanh toán',
+     //                total: orderDetail.total,
+     //           });
+     //           return {
+     //                success: true,
+     //                orderPaid: response,
+     //           };
+     //      } catch (error: any) {
+     //           return {
+     //                success: false,
+     //                error: error.message,
+     //           };
+     //      }
+     // };
      cancleOrder = async (id_order: string) => {
           try {
                const response = await OrderModel.findByIdAndUpdate(

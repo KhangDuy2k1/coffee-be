@@ -10,11 +10,11 @@ orderRouter.post(
      authMiddleware.VerifyAccount,
      orderCtr.orderCoffee
 );
-orderRouter.post(
-     Endpoint.PAY_ORDER,
-     authMiddleware.VerifyAccount,
-     orderCtr.payOrder
-);
+// orderRouter.post(
+//      Endpoint.PAY_ORDER,
+//      authMiddleware.VerifyAccount,
+//      orderCtr.payOrder
+// );
 orderRouter.delete(
      Endpoint.DELETE_ORDER,
      authMiddleware.VerifyAccount,
