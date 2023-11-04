@@ -34,7 +34,6 @@ class CoffeeITemCtr {
                name: string;
                price: number;
                volume: number;
-               stars: number;
                image: string;
                desc: string;
                category?: string;

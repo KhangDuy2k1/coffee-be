@@ -25,7 +25,7 @@ enum Endpoint {
 
      //=========================Category===================================
      UPDATE_CATEGORY = '/updatecategory/:category_id',
-     ADD_CATEGORY = '/addcategory', //thêm loại cà phê 
+     ADD_CATEGORY = '/addcategory', //thêm loại cà phê
      DELETE_CATEGORY = '/deletecategory/:category_id',
      GET_ALL_CATEGORY = '/getallcategory',
      //=====================================================================

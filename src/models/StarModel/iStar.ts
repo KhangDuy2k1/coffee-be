@@ -1,5 +1,7 @@
+import mongoose from 'mongoose';
+
 export interface IStar {
-     id_user?: string;
-     id_coffee?: string;
+     id_user?: mongoose.Types.ObjectId;
+     id_coffee?: mongoose.Types.ObjectId;
      stars: number;
 }

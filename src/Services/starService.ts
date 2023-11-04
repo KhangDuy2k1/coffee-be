@@ -22,7 +22,6 @@ export class StarService {
                for (let item of listStars) {
                     totalStars += item.stars;
                }
-               console.log(totalStars / totalReviews + '===========');
                const responseCoffee = await CoffeeItemModel.findByIdAndUpdate(
                     id_coffee,
                     {

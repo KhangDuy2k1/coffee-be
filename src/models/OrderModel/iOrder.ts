@@ -1,7 +1,7 @@
-import { Document } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 interface IOrder extends Document {
-     coffeeItem_id?: string;
-     user_id?: string;
+     coffeeItem_id?: mongoose.Types.ObjectId;
+     user_id?: mongoose.Types.ObjectId;
      quantity: number;
      total: number;
      status: string;

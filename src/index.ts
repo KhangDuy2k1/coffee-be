@@ -6,7 +6,7 @@ import AuthRouter from './routes/authRouter';
 import { CategoryRouter } from './routes/categoryRouter';
 import { orderRouter } from './routes/orderRouter';
 import { ErrorUrl } from './middlewares/errorMiddleware';
-import { RunSocket } from '../socket/socket';
+// import { RunSocket } from '../socket/socket';
 import cors, { CorsOptions } from 'cors';
 import http from 'http';
 
@@ -54,7 +54,7 @@ class App {
      public start = () => {
           this.server.listen(this.port, async (): Promise<void> => {
                await Connect();
-               new RunSocket(this.server);
+               // new RunSocket(this.server);
                console.log(
                     `⚡️[server]: Server is running at http://localhost:${this.port}`
                );

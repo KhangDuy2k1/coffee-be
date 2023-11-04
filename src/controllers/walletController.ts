@@ -14,7 +14,7 @@ export class WalletController {
           } else if (!response.error) {
                return res.status(StatusCode.BAD_REQUEST).json({
                     success: false,
-                    mes: 'đã tạo ví',
+                    mes: 'đã tạo ví truoc do',
                });
           } else {
                return res.status(StatusCode.SERVER_ERROR).json({

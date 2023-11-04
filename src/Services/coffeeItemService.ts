@@ -1,4 +1,6 @@
+import mongoose from 'mongoose';
 import CoffeeItemModel from '../models/CoffeeItemModel';
+import OrderModel from '../models/OrderModel';
 import UserModel from '../models/UserModel';
 class CoffeeItemService {
      createCoffee = async (body: {
@@ -16,7 +18,6 @@ class CoffeeItemService {
                     coffeeCreaeted: createCoffee,
                };
           } catch (error: any) {
-               console.error(error);
                return {
                     success: false,
                     error: error.message,
@@ -29,7 +30,6 @@ class CoffeeItemService {
                name: string;
                price: number;
                volume: number;
-               stars: number;
                image: string;
                desc: string;
                category?: string;
@@ -74,6 +74,9 @@ class CoffeeItemService {
                console.log(params.id);
                const deletedCoffee = await CoffeeItemModel.findOneAndDelete({
                     _id: params.id,
+               });
+               await OrderModel.findOneAndDelete({
+                    coffeeItem_id: params.id,
                });
                console.log(deletedCoffee);
                if (deletedCoffee == null) {
@@ -167,14 +170,15 @@ class CoffeeItemService {
      };
      likeCoffee = async (user_id: string, params: { coffee_id: string }) => {
           try {
+               const objectId = new mongoose.Types.ObjectId(params.coffee_id);
                const User_liked = await UserModel.findById(user_id);
-               if (User_liked?.likedCoffeeItem.includes(params.coffee_id)) {
+               if (User_liked?.likedCoffeeItem.includes(objectId)) {
                     return {
                          success: false,
                          mes: 'coffee đã được like trước đó',
                     };
                } else {
-                    User_liked?.likedCoffeeItem.push(params.coffee_id);
+                    User_liked?.likedCoffeeItem.push(objectId);
                     const user_liked = await User_liked?.save();
                     console.log(user_liked);
                     return {
@@ -194,9 +198,10 @@ class CoffeeItemService {
      };
      unlikeCoffee = async (user_id: string, params: { coffee_id: string }) => {
           try {
+               const objectId = new mongoose.Types.ObjectId(params.coffee_id);
                const User_unlike = await UserModel.findById(user_id);
                console.log(User_unlike);
-               if (!User_unlike?.likedCoffeeItem.includes(params.coffee_id)) {
+               if (!User_unlike?.likedCoffeeItem.includes(objectId)) {
                     return {
                          success: false,
                          mes: 'coffee chưa được like',
@@ -204,7 +209,10 @@ class CoffeeItemService {
                } else {
                     const newArrayLikedCoffee =
                          User_unlike.likedCoffeeItem.filter((coffee_id) => {
-                              return coffee_id.toString() !== params.coffee_id;
+                              return (
+                                   coffee_id.toString() !==
+                                   params.coffee_id.toString()
+                              );
                          });
                     User_unlike.likedCoffeeItem.splice(
                          0,

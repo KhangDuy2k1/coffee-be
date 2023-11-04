@@ -2,7 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 import ICategory from './iCategory';
 
 const CategorySchema: Schema<ICategory> = new Schema<ICategory>({
-     title: { 
+     title: {
           type: String,
           required: true,
      },

@@ -161,6 +161,7 @@ export class WalletService {
                          let moneyAfter =
                               walletUser.amountMoney - orderDetail.total;
                          walletUser.amountMoney = moneyAfter;
+                         console.log(moneyAfter);
                          await walletUser.save();
                          const creatOrder = await OrderModel.create({
                               coffeeItem_id: id_coffee,
@@ -169,6 +170,7 @@ export class WalletService {
                               total: orderDetail.total,
                               status: 'đã thanh toán',
                          });
+                         // console.log(creatOrder);
                          return {
                               success: true,
                               mes: 'thanh toán online thành công',

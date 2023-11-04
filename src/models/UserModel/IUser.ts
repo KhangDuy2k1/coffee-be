@@ -1,10 +1,10 @@
-import { Document } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 interface IUser extends Document {
      email: string;
      password: string;
      phonenumber: string;
      role: string;
-     likedCoffeeItem: string[];
+     likedCoffeeItem: mongoose.Types.ObjectId[];
      avatar: string;
      reftoken: String;
 }
