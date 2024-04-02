@@ -1,5 +1,5 @@
-import IUser from '../models/UserModel/IUser';
-import ICategory from '../models/CategoryModel/iCategory';
+import IUser from '../models/user/IUser';
+import ICategory from '../models/category/iCategory';
 export interface ResDefault {
      success: boolean;
      mes?: string;

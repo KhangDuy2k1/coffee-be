@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-import CoffeeItemModel from '../models/CoffeeItemModel';
-import OrderModel from '../models/OrderModel';
-import UserModel from '../models/UserModel';
+import CoffeeItemModel from '../models/coffeeItem';
+import OrderModel from '../models/order';
+import UserModel from '../models/user';
 class CoffeeItemService {
      createCoffee = async (body: {
           name: string;

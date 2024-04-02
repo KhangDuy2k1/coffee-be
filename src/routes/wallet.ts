@@ -1,7 +1,7 @@
 import express from 'express';
-import AuthMiddleware from '../middlewares/authMiddleware';
+import AuthMiddleware from '../middlewares/auth';
 import Endpoint from '../common/endpoint';
-import { WalletController } from '../controllers/walletController';
+import { WalletController } from '../controllers/wallet';
 const authMiddleware = new AuthMiddleware();
 const walletController = new WalletController();
 export const walletRouter = express.Router();

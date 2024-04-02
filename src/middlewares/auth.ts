@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import UserModel from '../models/UserModel';
-import GenarateToken from '../helpers/tokenHelper';
+import UserModel from '../models/user';
+import GenarateToken from '../helpers/token';
 import { StatusCode } from '../common/statusCode';
-import { ResDataToken, ResMiddlewareAuth } from '../helpers/interfacesHelper';
+import { ResDataToken, ResMiddlewareAuth } from '../helpers/interfaces';
 class AuthMiddleware {
      VerifyAccount = async (
           req: Request,

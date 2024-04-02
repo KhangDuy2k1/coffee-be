@@ -21,7 +21,7 @@ const UserSchema: Schema<IUser> = new Schema<IUser>(
           likedCoffeeItem: [
                {
                     type: Schema.Types.ObjectId,
-                    ref: 'CoffeeItem',
+                    ref: 'CoffeeItem', 
                },
           ],
           avatar: {

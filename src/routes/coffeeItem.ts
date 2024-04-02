@@ -1,7 +1,7 @@
 import express from 'express';
 import Endpoint from '../common/endpoint';
-import CoffeeITemCtr from '../controllers/coffeeItemController';
-import AuthMiddleware from '../middlewares/authMiddleware';
+import CoffeeITemCtr from '../controllers/coffeeItem';
+import AuthMiddleware from '../middlewares/auth';
 const CoffeeItemRouter = express.Router();
 const MiddlewareAuth = new AuthMiddleware();
 const CoffeeCtr = new CoffeeITemCtr();

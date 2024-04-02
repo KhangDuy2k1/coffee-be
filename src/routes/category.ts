@@ -1,9 +1,9 @@
 //=====================
 //=====================
 import express from 'express';
-import { CategoryCtrl } from '../controllers/categoryController';
+import { CategoryCtrl } from '../controllers/category';
 import Endpoint from '../common/endpoint';
-import AuthMiddleware from '../middlewares/authMiddleware';
+import AuthMiddleware from '../middlewares/auth';
 export const CategoryRouter = express.Router();
 const Category = new CategoryCtrl();
 const middlewaresAuth = new AuthMiddleware();

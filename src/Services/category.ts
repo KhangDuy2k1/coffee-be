@@ -1,6 +1,6 @@
-import CategoryModel from '../models/CategoryModel';
-import ICategory from '../models/CategoryModel/iCategory';
-import { Res_Category } from '../helpers/interfacesHelper';
+import CategoryModel from '../models/category';
+import ICategory from '../models/category/iCategory';
+import { Res_Category } from '../helpers/interfaces';
 export class CategoryService {
      addCategory = async (body: { title: string }): Promise<Res_Category> => {
           try {

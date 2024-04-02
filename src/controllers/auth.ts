@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import AuthService from '../Services/authService';
+import AuthService from '../Services/auth';
 import { StatusCode } from '../common/statusCode';
-import CheckId from '../helpers/checkIdHelper';
-import { ResAuth } from '../helpers/interfacesHelper';
+import CheckId from '../helpers/checkId';
+import { ResAuth } from '../helpers/interfaces';
 const authService = new AuthService();
 class AuthCtr {
      Register = async (req: Request, res: Response): Promise<any> => {

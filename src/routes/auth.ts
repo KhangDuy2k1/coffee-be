@@ -1,8 +1,8 @@
 import express from 'express';
 import Endpoint from '../common/endpoint';
-import AuthCtr from '../controllers/authController';
-import AuthMiddleware from '../middlewares/authMiddleware';
-import { ValidatesMiddleware } from '../middlewares/validatesMiddleware';
+import AuthCtr from '../controllers/auth';
+import AuthMiddleware from '../middlewares/auth';
+import { ValidatesMiddleware } from '../middlewares/validates';
 const validatesMiddleware = new ValidatesMiddleware();
 const AuthRouter = express.Router();
 const authCtr = new AuthCtr();

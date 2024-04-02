@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import JWT_Mes from '../common/jwt';
-import { ResDataToken } from './interfacesHelper';
+import { ResDataToken } from './interfaces';
 class GenarateToken {
      private id: string;
      constructor(id: string = '') {

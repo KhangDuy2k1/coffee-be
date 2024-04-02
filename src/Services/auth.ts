@@ -1,8 +1,8 @@
-import UserModel from '../models/UserModel';
+import UserModel from '../models/user';
 import bcrypt from 'bcrypt';
-import GenarateToken from '../helpers/tokenHelper';
-import { ResAuth, ResDataToken } from '../helpers/interfacesHelper';
-import IUser from '../models/UserModel/IUser';
+import GenarateToken from '../helpers/token';
+import { ResAuth, ResDataToken } from '../helpers/interfaces';
+import IUser from '../models/user/IUser';
 class AuthService {
      register = async (body: {
           email: string;

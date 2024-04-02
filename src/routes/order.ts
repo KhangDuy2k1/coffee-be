@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import Endpoint from '../common/endpoint';
-import { OrderController } from '../controllers/orderController';
-import AuthMiddleware from '../middlewares/authMiddleware';
+import { OrderController } from '../controllers/order';
+import AuthMiddleware from '../middlewares/auth';
 const authMiddleware = new AuthMiddleware();
 const orderCtr = new OrderController();
 export const orderRouter = express.Router();

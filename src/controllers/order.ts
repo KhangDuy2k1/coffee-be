@@ -1,7 +1,7 @@
-import { OrderService } from '../Services/orderService';
+import { OrderService } from '../Services/order';
 import { Request, Response } from 'express';
 import { StatusCode } from '../common/statusCode';
-import CheckId from '../helpers/checkIdHelper';
+import CheckId from '../helpers/checkId';
 const orderService = new OrderService();
 interface OrderDetail {
      coffeeitem_id: string;

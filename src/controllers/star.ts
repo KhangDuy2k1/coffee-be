@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { StarService } from '../Services/starService';
+import { StarService } from '../Services/star';
 import { StatusCode } from '../common/statusCode';
 const starService = new StarService();
 export class StarController {

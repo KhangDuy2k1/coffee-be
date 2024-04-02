@@ -1,6 +1,6 @@
 import e from 'express';
-import OrderModel from '../models/OrderModel';
-import UserModel from '../models/UserModel';
+import OrderModel from '../models/order';
+import UserModel from '../models/user';
 import walletModel from '../models/wallet';
 import { IWallet } from '../models/wallet/IWallet';
 export class WalletService {

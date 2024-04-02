@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { CategoryService } from '../Services/categoryService';
+import { CategoryService } from '../Services/category';
 import { StatusCode } from '../common/statusCode';
-import CheckId from '../helpers/checkIdHelper';
-import ICategory from '../models/CategoryModel/iCategory';
+import CheckId from '../helpers/checkId';
+import ICategory from '../models/category/iCategory';
 const Category: CategoryService = new CategoryService();
 interface ResJson {
      success: boolean;

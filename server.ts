@@ -1,5 +1,5 @@
-import App from './src';
+import { App } from './index';
+import 'dotenv/config';
 const port: number | string = process.env.PORT || 4000;
-console.log(port);
 const myApp = new App(port);
 myApp.start();

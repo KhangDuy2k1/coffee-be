@@ -1,12 +1,15 @@
-const mongoose = require('mongoose');
-// const URL = `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
-const url =
-     'mongodb+srv://khangduy123:khang123@coffee.hd94kae.mongodb.net/?retryWrites=true&w=majority';
+import mongoose from "mongoose";
+import { MongoClient } from "mongodb";
 const connectDb = async () => {
+     let url = process.env.URL_DB;
      try {
           mongoose.set('strictQuery', false);
-          await mongoose.connect(url);
-          console.log('connect db thanh cong');
+          if(typeof(url) === "string"){
+               await mongoose.connect(url);
+               console.log('connect db thanh cong');
+          }else {
+               console.log("đường dẫn không đúng");
+          }
      } catch (error) {
           console.error('Error connecting to MongoDB alias:', error);
      }

@@ -1,8 +1,8 @@
 import express, { Request, Response } from 'express';
-import CoffeeItemService from '../Services/coffeeItemService';
+import CoffeeItemService from '../Services/coffeeItem';
 // import CategoryModel from '../models/CategoryModel';
 import { StatusCode } from '../common/statusCode';
-import CheckId from '../helpers/checkIdHelper';
+import CheckId from '../helpers/checkId';
 const CoffeeItem = new CoffeeItemService();
 class CoffeeITemCtr {
      createCoffee = async (req: Request, res: Response) => {

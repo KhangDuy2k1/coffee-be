@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { WalletService } from '../Services/walletService';
+import { WalletService } from '../Services/wallet';
 import { StatusCode } from '../common/statusCode';
 const walletService = new WalletService();
 export class WalletController {

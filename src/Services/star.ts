@@ -1,5 +1,5 @@
-import CoffeeItemModel from '../models/CoffeeItemModel';
-import StarModel from '../models/StarModel';
+import CoffeeItemModel from '../models/coffeeItem';
+import StarModel from '../models/star';
 export class StarService {
      coffeeReviews = async (
           id_user: string,

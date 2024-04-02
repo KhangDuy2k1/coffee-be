@@ -1,7 +1,7 @@
 import Endpoint from '../common/endpoint';
-import { StarController } from '../controllers/starController';
+import { StarController } from '../controllers/star';
 const starController = new StarController();
-import AuthMiddleware from '../middlewares/authMiddleware';
+import AuthMiddleware from '../middlewares/auth';
 const authMiddleware = new AuthMiddleware();
 import express from 'express';
 export const reviewsRouter = express.Router();

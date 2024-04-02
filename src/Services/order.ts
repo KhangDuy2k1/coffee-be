@@ -1,5 +1,5 @@
-import IOrder from '../models/OrderModel/iOrder';
-import OrderModel from '../models/OrderModel';
+import IOrder from '../models/order/iOrder';
+import OrderModel from '../models/order';
 export class OrderService {
      orderCoffee = async (
           user_id: string,
